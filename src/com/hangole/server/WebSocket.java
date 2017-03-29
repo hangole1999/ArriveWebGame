@@ -1,5 +1,7 @@
 package com.hangole.server;
 
+import com.hangole.server.dao.AccountDAO;
+
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 
