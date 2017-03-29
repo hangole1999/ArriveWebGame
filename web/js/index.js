@@ -24,6 +24,7 @@ player.pivot.x = -50;
 player.scale.x = 0.3;
 player.scale.y = 0.3;
 player.speed = 2;
+player.destination = {position: {x: 0, y: 0}, rotation: 0};
 
 // move the sprite to the center of the screen
 player.x = app.renderer.width / 2;
@@ -33,32 +34,36 @@ app.stage.addChild(player);
 
 // Listen for animate update
 app.ticker.add(function(delta) {
-    if(keyDowns[37]) {
-        player.rotation = 3.16;
-        player.position.x -= player.speed;
-        if (keyDowns[38]) {
-            player.rotation = 3.955;
-            player.position.y -= player.speed;
-        } else if (keyDowns[40]) {
-            player.rotation = 2.375;
-            player.position.y += player.speed;
-        }
+    if (keyDowns[37]) {
+        player.destination.position.x = -1;
     } else if (keyDowns[39]) {
-        player.rotation = 0;
-        player.position.x += player.speed;
-        if (keyDowns[38]) {
-            player.rotation = 5.52;
-            player.position.y -= player.speed;
-        }
-        if (keyDowns[40]) {
-            player.rotation = 0.795;
-            player.position.y += player.speed;
-        }
-    } else if (keyDowns[38]) {
-        player.rotation = 4.75;
-        player.position.y -= player.speed;
-    } else if (keyDowns[40]) {
-        player.rotation = 1.59;
-        player.position.y += player.speed;
+        player.destination.position.x = 1;
+    } else if (keyDowns[38] || keyDowns[40]) {
+        player.destination.position.x = 0;
     }
+    if (keyDowns[38]) {
+        player.destination.position.y = -1;
+    } else if (keyDowns[40]) {
+        player.destination.position.y = 1;
+    } else if (keyDowns[37] || keyDowns[39]) {
+        player.destination.position.y = 0;
+    }
+
+    if ((player.destination.position.x != 0 && keyDowns[38+player.destination.position.x]) || (player.destination.position.y != 0 && keyDowns[39+player.destination.position.y])) {
+        player.position.x += player.destination.position.x * player.speed;
+        player.position.y += player.destination.position.y * player.speed;
+    }
+
+    player.destination.rotation = Math.atan2(player.destination.position.y, player.destination.position.x);
+
+    // player.rotation = lerpAngle(player.rotation, player.destination.rotation, 0.3);
+    player.rotation = player.destination.rotation;
 });
+
+function lerpAngle(from, to, t) {
+    return lerp(from, to, t);
+}
+
+function lerp(from, to, t) {
+    return from + t * (to - from);
+}
