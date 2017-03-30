@@ -1,6 +1,6 @@
 package com.hangole.server.controller;
 
-import com.hangole.server.dao.AccountDAO;
+import com.hangole.server.session.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,17 +21,16 @@ public class LoginController extends HttpServlet {
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
 
-        AccountDAO dao = AccountDAO.getInstance();
+//        AccountDAO dao = AccountDAO.getInstance();
 
         System.out.println("login.do");
 
-        String regPsw = dao.getPasswordFromID(id);
+        String regPsw = password;//dao.getPasswordFromID(id);
         if (regPsw == null || !regPsw.equals(password)) {
             System.out.println("Login Failed");
         }else{
             HttpSession session = req.getSession();
-            session.setAttribute("id", id);
-            session.setAttribute("psw", password);
+            session.setAttribute("user", new User(id, password));
             System.out.println("Login Succeed");
         }
         resp.sendRedirect("index.jsp");

@@ -1,18 +1,31 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Hangole
-  Date: 2017-03-20
-  Time: 오후 7:20
+  User: dsm_025
+  Date: 2017-03-29
+  Time: 오후 4:55
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
-    <title>Network Game</title>
-  </head>
-  <body>
-  <script src="js/pixi.min.js" type="text/javascript"></script>
-  <script src="js/index.js" type="text/javascript"></script>
-  <script type="text/javascript" src="js/websocket.js"></script>
-  </body>
+<head>
+    <title>Title</title>
+</head>
+<body>
+    <c:choose>
+        <c:when test="${sessionScope.user == null}">
+            <form action="login.do" method="post">
+                <fieldset>
+                    <label for="id">아이디 : </label>
+                    <input type="text" name="id" id="id"/>
+                    <label for="password">패스워드 : </label>
+                    <input type="password" name="password" id="password"/>
+                    <input type="submit">
+                </fieldset>
+            </form>
+        </c:when>
+        <c:otherwise>
+            <a href="/game.do">Game Start</a>
+        </c:otherwise>
+    </c:choose>
+</body>
 </html>
