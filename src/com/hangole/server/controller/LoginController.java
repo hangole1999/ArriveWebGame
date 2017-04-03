@@ -3,6 +3,7 @@ package com.hangole.server.controller;
 import com.hangole.server.session.User;
 import com.hangole.server.session.Util;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,5 +38,11 @@ public class LoginController extends HttpServlet {
             Util.addSession(session);
         }
         resp.sendRedirect("index.jsp");
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+        view.forward(request, response);
     }
 }

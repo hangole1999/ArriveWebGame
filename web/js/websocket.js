@@ -2,7 +2,7 @@
  * Created by Hangole on 2017-03-20.
  */
 
-var webSocket = new WebSocket("ws://localhost:8181/game");
+var webSocket = new WebSocket("ws://localhost:8882/game");
 
 webSocket.onopen = function(message){
     console.log('onopen('+message+')');
