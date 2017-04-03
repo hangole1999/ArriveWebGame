@@ -1,6 +1,7 @@
 package com.hangole.server.controller;
 
 import com.hangole.server.session.User;
+import com.hangole.server.session.Util;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +16,8 @@ import java.io.IOException;
 public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("login.do");
+
         req.setCharacterEncoding("euc-kr");
         String id = req.getParameter("id");
         String password = req.getParameter("password");
@@ -23,15 +26,15 @@ public class LoginController extends HttpServlet {
 
 //        AccountDAO dao = AccountDAO.getInstance();
 
-        System.out.println("login.do");
 
         String regPsw = password;//dao.getPasswordFromID(id);
         if (regPsw == null || !regPsw.equals(password)) {
             System.out.println("Login Failed");
         }else{
             HttpSession session = req.getSession();
-            session.setAttribute("user", new User(id, password));
+            session.setAttribute("user", new User(id, password, req.getRemoteAddr()));
             System.out.println("Login Succeed");
+            Util.addSession(session);
         }
         resp.sendRedirect("index.jsp");
     }

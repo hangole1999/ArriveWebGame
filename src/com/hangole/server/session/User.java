@@ -5,25 +5,34 @@ package com.hangole.server.session;
  */
 public class User {
 
-    private String identity;
+    private String id;
     private String password;
+    private String ip;
 
-    public User(String identity, String password) {
-        this.identity = identity;
+    public User(String id, String password, String ip) {
+        this.id = id;
         this.password = password;
+        this.ip = ip;
     }
 
-    public String getIdentity() {
-        return identity;
+    public String getId() {
+        return id;
     }
     public String getPassword() {
         return password;
     }
+    public String getIp() {
+        return ip;
+    }
 
-    public void setIdentity(String identity) {
-        this.identity = identity;
+    public void setId(String id) {
+        this.id = id;
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 }
