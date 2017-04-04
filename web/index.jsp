@@ -1,3 +1,11 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Hangole
+  Date: 2017-04-04
+  Time: 오후 7:31
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -27,7 +35,7 @@
 		<div class="col 20 s6">
 		  <h4 class="valign blue-grey-text">LOGIN</h4>
 
-			<form name="informations" action="/login" method="post">
+			<form name="informations" action="/login.do" method="post">
 	      <div class="row">
 	        <div class="input-field">
 	          <input id="id" name="id" list="0" type="text" minlength="5" maxlength="20" length="20" required class="validate" autofocus>
@@ -57,7 +65,7 @@
 
 	<div class="fixed-action-btn" style="bottom: 16px; top: -2px; left: 16px; width: 60px; overflow-y: auto; overflow-x: hidden;">
 		<center>
-				<a href="./index.html">
+				<a href="">
 				<div class="card hoverable light-blue lighten-2 tooltipped" style="padding:10px; width:40px; height: 50px;" data-position="right" data-delay="50" data-tooltip="Home">
 			  	<center><i class="material-icons" style="height:20px"><font color=white size=4.5>home</font></i></center>
 				</div>
@@ -67,6 +75,6 @@
 
 	<!--  Scripts-->
 	<script src="js/jquery.min.js"></script>
-	<script src="js/materialize.min.js"></script>
+	<script src="js/materialize.min.js"></script>SS
 </body>
 </html>
