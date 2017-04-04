@@ -16,7 +16,7 @@ public class AccountDAO {
         mongoClient = new MongoClient("localhost", 27017);
         WriteConcern w = new WriteConcern(1, 2000);
         mongoClient.setWriteConcern(w);
-        db = mongoClient.getDB("word");
+        db = mongoClient.getDB("users");
         coll = db.getCollection("users");
     }
 
@@ -33,5 +33,30 @@ public class AccountDAO {
             return null;
         }
         return temp.get("psw").toString();
+    }
+
+    public void insertSignUpInfo(String email, String pwd) {
+        try {
+            boolean isInsert = false;
+
+            DBCursor cursor = coll.find();
+            while (cursor.hasNext()) {
+                if (cursor.next().get("email").equals(email)) {
+                    System.out.println("이메일 중복!");
+                    isInsert = true;
+                }
+            }
+
+            if (isInsert == false) {
+                BasicDBObject doc = new BasicDBObject();
+                doc.put("email", email);
+                doc.put("password", pwd);
+
+                coll.insert(doc);
+            }
+        }catch (MongoQueryException m){
+            System.out.println("insertSignUpInfo 메소드 오류");
+            m.printStackTrace();
+        }
     }
 }

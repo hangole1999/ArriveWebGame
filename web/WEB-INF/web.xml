@@ -4,6 +4,15 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
     <display-name>Apache-Axis</display-name>
+
+    <servlet>
+        <servlet-name>SignUpController</servlet-name>
+        <servlet-class>com.hangole.server.controller.SignUpController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SignUpController</servlet-name>
+        <url-pattern>/signup.do</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>LoginController</servlet-name>
         <servlet-class>com.hangole.server.controller.LoginController</servlet-class>
