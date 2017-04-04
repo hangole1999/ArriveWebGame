@@ -2,6 +2,7 @@ package com.hangole.game;
 
 import com.hangole.game.common.Player;
 import com.hangole.game.common.Room;
+import com.hangole.game.controller.MainPageController;
 import com.hangole.server.session.Util;
 import org.json.JSONObject;
 
@@ -29,11 +30,24 @@ public class WebSocket {
     }
 
     @OnMessage
-    public void onMessage(String message, Session session) {
+    public void onMessage(String message, Session session) throws IOException {
         System.out.println("onMessage("+message+")");
         JSONObject jsonObject = new JSONObject(message);
         switch (jsonObject.getString("type")){
             case "create_room" :
+                Room created_room = MainPageController.createRoom(jsonObject.getString("name"), jsonObject.getBoolean("lock"), jsonObject.getString("password"), session);
+                session.getBasicRemote().sendText(created_room.getRoomInfomToJSON().put("type", "room_detail").toString());
+                break;
+            case "enter_room" :
+                Room entered_room = MainPageController.enterRoom(jsonObject.getInt("roomNum"), session);
+                if(entered_room != null){
+                    ArrayList<Session> roomMembers = entered_room.getPlayerSession();
+                    for(Session member : roomMembers){
+                        member.getBasicRemote().sendText(entered_room.getRoomInfomToJSON().put("type", "room_detail").toString());
+                    }
+                }else{
+                    session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("방 인원이 가득 찼습니다."));
+                }
                 break;
         }
     }
