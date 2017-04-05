@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 /**
  * Created by dsm_025 on 2017-04-03.
+ *
  */
 public class Util {
     private static ArrayList<HttpSession> sessionList = new ArrayList<>();
@@ -20,6 +21,7 @@ public class Util {
 
     public static String findEqualSessionId(Session session) {
         String gameSessionIP = session.getUserProperties().get("javax.websocket.endpoint.remoteAddress").toString();
+        session.getId();
         for(HttpSession httpSession : sessionList ){
             User user = (User)httpSession.getAttribute("user");
             if(user.getIp().equals(gameSessionIP)){

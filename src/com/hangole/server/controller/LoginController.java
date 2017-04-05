@@ -27,7 +27,6 @@ public class LoginController extends HttpServlet {
 
 //        AccountDAO dao = AccountDAO.getInstance();
 
-
         String regPsw = password;//dao.getPasswordFromID(id);
         if (regPsw == null || !regPsw.equals(password)) {
             System.out.println("Login Failed");
