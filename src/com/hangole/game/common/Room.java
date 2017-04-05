@@ -10,19 +10,19 @@ import java.util.ArrayList;
 /**
  * Created by dsm_025 on 2017-04-03.
  */
+
 public class Room {
+
     private static ArrayList<Room> roomList = new ArrayList<>();
     private ArrayList<Player> playerList;
     private final int MAX_PLAYER = 4;
     private boolean lock;
-
 
     private int playerNumber;
     private int roomNum;
     private String name;
     private String password;
     private Player roomMaster;
-
 
     public Room(String name, String password, Player roomMaster, boolean lock, int roomNum) {
         this.name = name;
@@ -32,6 +32,10 @@ public class Room {
         this.roomNum = roomNum;
         playerList = new ArrayList<>();
         addPlayer(roomMaster);
+    }
+
+    public Player getRoomMaster(){
+        return this.roomMaster;
     }
 
     public static ArrayList<Room> getRoomList() {
@@ -94,7 +98,7 @@ public class Room {
         playerList.add(player);
     }
 
-    public void remocePlayer(Player player) {
+    public void removePlayer(Player player) {
         playerList.remove(player);
     }
 
@@ -116,6 +120,7 @@ public class Room {
         object.put("roomNum", roomNum);
         object.put("lock", lock);
         object.put("playerNum", playerList.size());
+        object.put("roomMaster", roomMaster.getId());
         JSONArray array = new JSONArray();
         for(Player player : getPlayerList()){
             JSONObject temp = new JSONObject();
@@ -124,4 +129,18 @@ public class Room {
         object.put("playerList", array);
         return object;
     }
+
+    public boolean changeRoomMaster(Player beforePlayer){
+        Boolean isSuccess = false;
+
+        for(Player player : playerList){
+            if(roomMaster.getId().equals(beforePlayer.getId())){
+                roomMaster = beforePlayer;
+                isSuccess = true;
+            }
+        }
+        return isSuccess;
+    }
+
+
 }

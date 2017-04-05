@@ -56,7 +56,11 @@
 			  </button>
 			</form>
 
+<<<<<<< HEAD
 			<a href="/join" class="btn waves-effect waves-light cyan right tooltipped" style="width:48%" data-position="bottom" data-delay="50" data-tooltip="Join">
+=======
+			<a href="signUp.jsp" class="btn waves-effect waves-light cyan right tooltipped" style="width:48%" data-position="bottom" data-delay="50" data-tooltip="Join">
+>>>>>>> origin/master
 				join
 				<i class="material-icons right">assignment_ind</i>
 			</a>

@@ -16,7 +16,6 @@ public class SignUpController extends HttpServlet {
     private String email;
     private String password;
 
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         req.setCharacterEncoding("euc-kr");
