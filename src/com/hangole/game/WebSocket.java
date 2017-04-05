@@ -15,12 +15,12 @@ import java.util.ArrayList;
  * Created by Hangole on 2017-03-20.
  */
 
-@ServerEndpoint("/game")
+@ServerEndpoint(value = "/game" , configurator = GetHttpSessionConfigurator.class)
 public class WebSocket {
     private static ArrayList<Session> list = new ArrayList<>();
 
     @OnOpen
-    public void onOpen(Session session) throws IOException {
+    public void onOpen(Session session, EndpointConfig config) throws IOException {
         System.out.println("onOnpen()");
         list.add(session);
         session.getBasicRemote().sendText(Room.getRoomListAsJSON());
