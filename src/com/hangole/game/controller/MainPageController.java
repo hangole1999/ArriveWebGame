@@ -1,5 +1,6 @@
 package com.hangole.game.controller;
 
+import com.hangole.game.common.Player;
 import com.hangole.game.common.Room;
 import org.json.JSONObject;
 
@@ -23,6 +24,7 @@ public class MainPageController {
 
         if(targetRoom != null){
             targetRoom.addPlayer(getPlayerEqualSession(session));
+            return targetRoom;
         }
 
         return null;
@@ -37,4 +39,16 @@ public class MainPageController {
         }
         return null;
     }
+
+    /*
+    public static Room changeMaster(int roomNum, Session session){
+        Room targetRoom = findRoomFromNum(roomNum);
+
+        if(targetRoom != null){
+            targetRoom.changeRoomMaster(Player.getPlayerEqualSession(session));
+            return targetRoom;
+        }
+        return null;
+    }
+    */
 }

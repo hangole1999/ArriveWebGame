@@ -1,6 +1,7 @@
 package com.hangole.server.dao;
 
 import com.mongodb.*;
+import org.json.JSONObject;
 
 
 /**
@@ -37,17 +38,17 @@ public class AccountDAO {
 
     public void insertSignUpInfo(String email, String pwd) {
         try {
-            boolean isInsert = false;
+            boolean isOverlap = false;
 
             DBCursor cursor = coll.find();
             while (cursor.hasNext()) {
                 if (cursor.next().get("email").equals(email)) {
                     System.out.println("이메일 중복!");
-                    isInsert = true;
+                    isOverlap = true;
                 }
             }
 
-            if (isInsert == false) {
+            if (isOverlap == false) {
 
                 BasicDBObject doc = new BasicDBObject();
 
@@ -55,6 +56,7 @@ public class AccountDAO {
                 doc.put("password", pwd);
 
                 coll.insert(doc);
+
             }
         } catch (MongoQueryException m) {
             System.out.println("insertSignUpInfo 메소드 오류");
