@@ -11,11 +11,11 @@ import java.util.ArrayList;
  * Created by dsm_025 on 2017-04-03.
  */
 public class Room {
+
     private static ArrayList<Room> roomList = new ArrayList<>();
     private ArrayList<Player> playerList;
     private final int MAX_PLAYER = 4;
     private boolean lock;
-
 
     private int playerNumber;
     private int roomNum;
@@ -94,7 +94,7 @@ public class Room {
         playerList.add(player);
     }
 
-    public void remocePlayer(Player player) {
+    public void removePlayer(Player player) {
         playerList.remove(player);
     }
 
@@ -123,5 +123,13 @@ public class Room {
         }
         object.put("playerList", array);
         return object;
+    }
+
+    public void changeRoomMaster(Player beforePlayer){
+        for(Player player : playerList){
+            if(roomMaster.getId().equals(beforePlayer.getId())){
+                roomMaster = beforePlayer;
+            }
+        }
     }
 }

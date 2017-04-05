@@ -12,7 +12,7 @@ public class AccountDAO {
     private DB db;
     private DBCollection coll;
 
-    private AccountDAO()  {
+    private AccountDAO() {
         mongoClient = new MongoClient("localhost", 27017);
         WriteConcern w = new WriteConcern(1, 2000);
         mongoClient.setWriteConcern(w);
@@ -20,16 +20,16 @@ public class AccountDAO {
         coll = db.getCollection("users");
     }
 
-    public static AccountDAO getInstance(){
+    public static AccountDAO getInstance() {
         return instance;
     }
 
-    public String getPasswordFromID(String id){
+    public String getPasswordFromID(String id) {
         BasicDBObject basicDBObject = new BasicDBObject("id", id);
         basicDBObject.get("id");
         DBCursor cursor = coll.find(basicDBObject);
         BasicDBObject temp;
-        if((temp = (BasicDBObject) cursor.next()) == null){
+        if ((temp = (BasicDBObject) cursor.next()) == null) {
             return null;
         }
         return temp.get("psw").toString();
@@ -48,13 +48,15 @@ public class AccountDAO {
             }
 
             if (isInsert == false) {
+
                 BasicDBObject doc = new BasicDBObject();
+
                 doc.put("email", email);
                 doc.put("password", pwd);
 
                 coll.insert(doc);
             }
-        }catch (MongoQueryException m){
+        } catch (MongoQueryException m) {
             System.out.println("insertSignUpInfo 메소드 오류");
             m.printStackTrace();
         }
