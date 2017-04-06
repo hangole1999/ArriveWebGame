@@ -12,10 +12,8 @@
 </head>
 <body>
 <form action="signup.do" method="post">
-    아이디 : <input type="text" name="id" maxlength="8"> <br>
-    암호 : <input type="password" name="pwd" maxlength="8"> <br>
-    이름 : <input type="text" name="name" maxlength="12"><br>
     e-mail : <input type="text" name="email" maxlength="25"><br>
+    암호 : <input type="password" name="pwd" maxlength="8"> <br>
     <input type="submit" value="저장">
 </form>
 </body>
