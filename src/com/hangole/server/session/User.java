@@ -7,12 +7,10 @@ public class User {
 
     private String id;
     private String password;
-    private String ip;
 
-    public User(String id, String password, String ip) {
+    public User(String id, String password) {
         this.id = id;
         this.password = password;
-        this.ip = ip;
     }
 
     public String getId() {
@@ -20,9 +18,6 @@ public class User {
     }
     public String getPassword() {
         return password;
-    }
-    public String getIp() {
-        return ip;
     }
 
     public void setId(String id) {
@@ -32,7 +27,4 @@ public class User {
         this.password = password;
     }
 
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
 }

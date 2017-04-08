@@ -6,6 +6,7 @@ import com.hangole.game.controller.MainPageController;
 import com.hangole.server.session.Util;
 import org.json.JSONObject;
 
+import javax.servlet.http.HttpSession;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
@@ -24,8 +25,9 @@ public class WebSocket {
         System.out.println("onOnpen()");
         list.add(session);
         session.getBasicRemote().sendText(Room.getRoomListAsJSON());
-
-        Player player = new Player(Util.findEqualSessionId(session), false, session);
+        HttpSession httpSession = (HttpSession) config.getUserProperties()
+                .get(HttpSession.class.getName());
+        Player player = new Player(Util.findEqualSessionId(httpSession), false, session);
         Player.addPlayerToList(player);
     }
 
@@ -41,7 +43,6 @@ public class WebSocket {
             break;
             case "enter_room": {
                 Room entered_room = MainPageController.enterRoom(jsonObject.getInt("roomNum"), session);
-
                 if (entered_room != null) {
                     ArrayList<Session> roomMembers = entered_room.getPlayerSession();
                     for (Session member : roomMembers) {

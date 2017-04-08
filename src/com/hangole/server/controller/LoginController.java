@@ -32,7 +32,7 @@ public class LoginController extends HttpServlet {
             System.out.println("Login Failed");
         }else{
             HttpSession session = req.getSession();
-            session.setAttribute("user", new User(id, password, req.getRemoteAddr()));
+            session.setAttribute("user", new User(id, password));
             System.out.println("Login Succeed");
             Util.addSession(session);
         }

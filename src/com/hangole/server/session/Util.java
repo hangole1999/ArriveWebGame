@@ -1,7 +1,6 @@
 package com.hangole.server.session;
 
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 import java.util.ArrayList;
 
 /**
@@ -19,13 +18,11 @@ public class Util {
         sessionList.add(session);
     }
 
-    public static String findEqualSessionId(Session session) {
-        String gameSessionIP = session.getUserProperties().get("javax.websocket.endpoint.remoteAddress").toString();
-        session.getId();
+    public static String findEqualSessionId(HttpSession session) {
+
         for(HttpSession httpSession : sessionList ){
-            User user = (User)httpSession.getAttribute("user");
-            if(user.getIp().equals(gameSessionIP)){
-                return user.getId();
+            if(httpSession.equals(session)){
+                return ((User)httpSession.getAttribute("user")).getId();
             }
         }
         return null;
