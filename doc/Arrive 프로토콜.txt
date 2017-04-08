@@ -1,0 +1,49 @@
+=============== Client to Server ===========
+create new room (Client to Server)
+{
+  "type" : "create_room",
+  "name" : "jinseong's room",
+  "password" : 1234,
+  "lock" : true
+}
+enter room (Client to Server)
+{
+  "type" : "enter_room",
+  "rommNum" : 2,
+}
+
+================ Server to Client
+send entire roomList (Server to Client)
+{
+  "type" : "entire_roomList",
+  "roomList" : [
+    {
+      "roomNum" : 1,
+      "name" : "jinseong's room",
+      "password" : 1234,
+      "playerNum" : 2
+    }
+    ...
+  ]
+}
+
+
+
+error (모든 에러 상황)
+{
+  "type" : "error",
+  "message" : "방 인원이 가득찼습니다. "
+}
+room detail response
+{
+  "type" : "room_detail",
+  "name" : "jinseong's room",
+  "roomNum" : 2,
+  "lock" : true,
+  "playerNum" : 2,
+  "playerList" [
+      { "id" : "jinseong" },
+      { "id" : "keyhwang"}
+  ]
+}
+crea
