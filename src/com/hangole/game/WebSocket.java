@@ -85,6 +85,7 @@ public class WebSocket {
                     for(Player player : targetRoom.getPlayerList()){
                         player.getSession().getBasicRemote().sendText(com.hangole.game.Util.makeSuccessLog("게임을 시작합니다."));
                     }
+
                 }else{
                     session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("레디를 안한 팀원이 있습니다."));
                 }
