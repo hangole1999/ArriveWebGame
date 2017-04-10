@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * Created by Hangole on 2017-03-20.
  */
 
-@ServerEndpoint(value = "/game" , configurator = GetHttpSessionConfigurator.class)
+@ServerEndpoint(value = "/game", configurator = GetHttpSessionConfigurator.class)
 public class WebSocket {
     private static ArrayList<Session> list = new ArrayList<>();
 
@@ -66,7 +66,10 @@ public class WebSocket {
                     }
                 }
             }
+            break;
+            case "move_character":{
 
+            }
         }
     }
 

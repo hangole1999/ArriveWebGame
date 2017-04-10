@@ -36,13 +36,13 @@ public class AccountDAO {
         return temp.get("psw").toString();
     }
 
-    public void insertSignUpInfo(String email, String pwd) {
+    public void insertSignUpInfo(String id, String pwd) {
         try {
             boolean isOverlap = false;
 
             DBCursor cursor = coll.find();
             while (cursor.hasNext()) {
-                if (cursor.next().get("email").equals(email)) {
+                if (cursor.next().get("email").equals(id)) {
                     System.out.println("이메일 중복!");
                     isOverlap = true;
                 }
@@ -52,7 +52,7 @@ public class AccountDAO {
 
                 BasicDBObject doc = new BasicDBObject();
 
-                doc.put("email", email);
+                doc.put("id", id);
                 doc.put("password", pwd);
 
                 coll.insert(doc);
