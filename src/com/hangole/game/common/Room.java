@@ -134,7 +134,6 @@ public class Room {
 
     public boolean changeRoomMaster(Player beforePlayer){
         Boolean isSuccess = false;
-
         for(Player player : playerList){
             if(roomMaster.getId().equals(beforePlayer.getId())){
                 roomMaster = beforePlayer;

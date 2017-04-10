@@ -47,7 +47,6 @@ public class Player {
         message.put("type","Position");
         message.put("x",getPlayerEqualSession(session).getPositionX());
         message.put("y",getPlayerEqualSession(session).getPositionY());
-
         return message.toString();
     }
 

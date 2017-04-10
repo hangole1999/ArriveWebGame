@@ -8,7 +8,6 @@ import org.json.JSONObject;
  */
 public class Util {
 
-
     public static String makeErrorLog(String message){
         JSONObject object = new JSONObject();
         object.put("type", "error");
