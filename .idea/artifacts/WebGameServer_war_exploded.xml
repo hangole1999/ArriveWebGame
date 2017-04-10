@@ -7,6 +7,13 @@
         <element id="directory" name="classes">
           <element id="module-output" name="ArriveWebGame" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="junit-4.11" />
+          <element id="library" level="project" name="javax.servlet.jsp.jstl" />
+          <element id="library" level="project" name="mongo-java-driver-3.4.0" />
+          <element id="library" level="project" name="WebSocket-1.0" />
+          <element id="library" level="project" name="JAX-WS-Apache Axis" />
+        </element>
       </element>
     </root>
   </artifact>

@@ -30,8 +30,8 @@ send entire roomList (Server to Client)
 send character Position (Server to Client)
 {
    "type" : "characterPosition",
-   "x" : "192"
-   "y" : "5"
+   "x" : "(double 형)"
+   "y" : "(double 형)"
 }
 
 

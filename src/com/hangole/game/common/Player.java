@@ -43,11 +43,11 @@ public class Player {
     public static String getPositionAsJSON(Session session){
         JSONObject message = new JSONObject();
         JSONArray array = new JSONArray();
-        message.put("type","characterPosition");
+        message.put("type","Position");
+        message.put("x",getPlayerEqualSession(session).getPositionX());
+        message.put("y",getPlayerEqualSession(session).getPositionY());
 
-        JSONObject object = new JSONObject();
-        object.put("x",getPlayerEqualSession(session).getPositionX());
-        object.put("y",getE)
+        return message.toString();
     }
 
     public String getId() {
