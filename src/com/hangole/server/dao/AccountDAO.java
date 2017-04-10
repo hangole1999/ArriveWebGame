@@ -3,6 +3,8 @@ package com.hangole.server.dao;
 import com.mongodb.*;
 import org.json.JSONObject;
 
+import java.net.UnknownHostException;
+
 
 /**
  * Created by dsm_025 on 2017-03-27.
@@ -14,11 +16,15 @@ public class AccountDAO {
     private DBCollection coll;
 
     private AccountDAO() {
-        mongoClient = new MongoClient("localhost", 27017);
-        WriteConcern w = new WriteConcern(1, 2000);
-        mongoClient.setWriteConcern(w);
-        db = mongoClient.getDB("users");
-        coll = db.getCollection("users");
+        try {
+            mongoClient = new MongoClient("localhost", 27017);
+            WriteConcern w = new WriteConcern(1, 2000);
+            mongoClient.setWriteConcern(w);
+            db = mongoClient.getDB("users");
+            coll = db.getCollection("users");
+        }catch (UnknownHostException e){
+            e.printStackTrace();
+        }
     }
 
     public static AccountDAO getInstance() {
@@ -58,7 +64,7 @@ public class AccountDAO {
                 coll.insert(doc);
 
             }
-        } catch (MongoQueryException m) {
+        } catch (MongoException m) {
             System.out.println("insertSignUpInfo 메소드 오류");
             m.printStackTrace();
         }
