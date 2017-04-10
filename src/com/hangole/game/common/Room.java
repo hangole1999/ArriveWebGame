@@ -96,10 +96,11 @@ public class Room {
 
     public void addPlayer(Player player) {
         playerList.add(player);
+        player.setReadyState(false);
     }
 
-    public void removePlayer(Player player) {
-        playerList.remove(player);
+    public boolean removePlayer(Player player) {
+        return playerList.remove(player);
     }
 
     public ArrayList<Player> getPlayerList(){
@@ -114,7 +115,7 @@ public class Room {
         return sessionList;
     }
 
-    public JSONObject getRoomInfomToJSON(){
+    public JSONObject getRoomDetailInfomToJSON(){
         JSONObject object = new JSONObject();
         object.put("name", name);
         object.put("roomNum", roomNum);
@@ -124,7 +125,9 @@ public class Room {
         JSONArray array = new JSONArray();
         for(Player player : getPlayerList()){
             JSONObject temp = new JSONObject();
-            array.put(temp.put("id", player.getId()));
+            temp.put("id", player.getId());
+            temp.put("ready", player.isReadyState());
+            array.put(temp);
         }
         object.put("playerList", array);
         return object;
@@ -142,5 +145,13 @@ public class Room {
         return isSuccess;
     }
 
-
+    public boolean isGamePossible() {
+        for(Player player : playerList){
+            if(player.equals(roomMaster) || player.isReadyState()){
+                continue;
+            }
+            return false;
+        }
+        return true;
+    }
 }

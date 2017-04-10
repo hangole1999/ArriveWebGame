@@ -38,7 +38,7 @@ public class WebSocket {
         switch (jsonObject.getString("type")) {
             case "create_room": {
                 Room created_room = MainPageController.createRoom(jsonObject.getString("name"), jsonObject.getBoolean("lock"), jsonObject.getString("password"), session);
-                session.getBasicRemote().sendText(created_room.getRoomInfomToJSON().put("type", "room_detail").toString());
+                session.getBasicRemote().sendText(created_room.getRoomDetailInfomToJSON().put("type", "room_detail").toString());
             }
             break;
             case "enter_room": {
@@ -46,7 +46,7 @@ public class WebSocket {
                 if (entered_room != null) {
                     ArrayList<Session> roomMembers = entered_room.getPlayerSession();
                     for (Session member : roomMembers) {
-                        member.getBasicRemote().sendText(entered_room.getRoomInfomToJSON().put("type", "room_detail").toString());
+                        member.getBasicRemote().sendText(entered_room.getRoomDetailInfomToJSON().put("type", "room_detail").toString());
                     }
                 } else {
                     session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("방 인원이 가득 찼습니다."));
@@ -55,15 +55,38 @@ public class WebSocket {
             break;
             case "change_master": {
                 Room targetRoom = MainPageController.findRoomFromNum(jsonObject.getInt("roomNum"));
-
                 if (targetRoom != null) {
                     Boolean isSuccess = targetRoom.changeRoomMaster(Player.getPlayerEqualSession(session));
 
                     if (isSuccess == true) {
-                        session.getBasicRemote().sendText(targetRoom.getRoomInfomToJSON().put("type", "room_detail").toString());
+                        session.getBasicRemote().sendText(targetRoom.getRoomDetailInfomToJSON().put("type", "room_detail").toString());
                     } else {
                         session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("방장 변경에 실패했습니다."));
                     }
+                }
+            }
+            break;
+            case "change_ready" : {
+                Player.getPlayerEqualSession(session).changeReadyState();
+            }
+            break;
+            case "get_out_room" : {
+                Room targetRoom = MainPageController.findRoomFromNum(jsonObject.getInt("roomNum"));
+                if(targetRoom.removePlayer(Player.getPlayerEqualSession(session))){
+                    session.getBasicRemote().sendText(com.hangole.game.Util.makeSuccessLog("나가기 성공"));
+                }else{
+                    session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("나가기 성공"));
+                }
+            }
+            break;
+            case "game_start":{
+                Room targetRoom = MainPageController.findRoomFromNum(jsonObject.getInt("roomNum"));
+                if(targetRoom.isGamePossible()){
+                    for(Player player : targetRoom.getPlayerList()){
+                        player.getSession().getBasicRemote().sendText(com.hangole.game.Util.makeSuccessLog("게임을 시작합니다."));
+                    }
+                }else{
+                    session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("레디를 안한 팀원이 있습니다."));
                 }
             }
             break;

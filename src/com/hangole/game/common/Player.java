@@ -15,6 +15,7 @@ public class Player {
     private String id;
     private boolean roomMaster;
     private Session session;
+    private boolean readyState;
     private double characPositionX = 0;
     private double characPositionY = 0;
 
@@ -72,6 +73,18 @@ public class Player {
 
     public static ArrayList<Player> getPlayerList() {
         return playerList;
+    }
+
+    public boolean isReadyState() {
+        return readyState;
+    }
+
+    public void setReadyState(boolean readyState) {
+        this.readyState = readyState;
+    }
+
+    public void changeReadyState() {
+        this.readyState = !readyState;
     }
 
     public static Player getEqualPlayer(Player player) {
