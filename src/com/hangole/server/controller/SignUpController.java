@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 public class SignUpController extends HttpServlet {
 
-    private String email;
+    private String id;
     private String password;
 
     @Override
@@ -24,14 +24,14 @@ public class SignUpController extends HttpServlet {
 
         System.out.println("signup.do");
 
-        email = req.getParameter("email");
+        id = req.getParameter("id");
         password = req.getParameter("password");
 
-        System.out.println("getEmail : "+email);
+        System.out.println("getId : "+id);
         System.out.println("getPwd : "+password);
 
         AccountDAO dao = AccountDAO.getInstance();
-        dao.insertSignUpInfo(email, password);
+        dao.insertSignUpInfo(id, password);
     }
 }
 
