@@ -1,10 +1,15 @@
 package com.hangole.game.controller;
 
+import com.hangole.game.common.Maps;
 import com.hangole.game.common.Player;
 import com.hangole.game.common.Room;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.websocket.Session;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 import static com.hangole.game.common.Player.getPlayerEqualSession;
 
@@ -38,6 +43,20 @@ public class MainPageController {
             }
         }
         return null;
+    }
+
+    public static String getGameStartInform(Room room){
+        JSONObject object = new JSONObject();
+        object.put("type", "game_inform");
+        object.put("map_json", room.getMap().getPath());
+        JSONArray array = new JSONArray();
+        for(String s : room.getMap().getResourcePaths()){
+            JSONObject path = new JSONObject();
+            path.put("path" , s);
+            array.put(path);
+        }
+        object.put("map_resources", array);
+        return object.toString();
     }
 
     /*

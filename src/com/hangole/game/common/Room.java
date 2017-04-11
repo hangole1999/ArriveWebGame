@@ -22,6 +22,7 @@ public class Room {
     private String name;
     private String password;
     private Player roomMaster;
+    private Maps map = Maps.FIRST_MAP;
 
     public Room(String name, String password, Player roomMaster, boolean lock, int roomNum) {
         this.name = name;
@@ -69,6 +70,10 @@ public class Room {
         this.password = password;
     }
 
+    public Maps getMap(){
+        return this.map;
+    }
+
     public boolean isLock() {
         return lock;
     }
@@ -95,10 +100,11 @@ public class Room {
 
     public void addPlayer(Player player) {
         playerList.add(player);
+        player.setReadyState(false);
     }
 
-    public void removePlayer(Player player) {
-        playerList.remove(player);
+    public boolean removePlayer(Player player) {
+        return playerList.remove(player);
     }
 
     public ArrayList<Player> getPlayerList(){
@@ -113,25 +119,33 @@ public class Room {
         return sessionList;
     }
 
-    public JSONObject getRoomInfomToJSON(){
+    public JSONObject getRoomDetailInfomToJSON(){
         JSONObject object = new JSONObject();
         object.put("name", name);
         object.put("roomNum", roomNum);
         object.put("lock", lock);
         object.put("playerNum", playerList.size());
         object.put("roomMaster", roomMaster.getId());
-        JSONArray array = new JSONArray();
+        JSONArray playerArray = new JSONArray();
         for(Player player : getPlayerList()){
             JSONObject temp = new JSONObject();
-            array.put(temp.put("id", player.getId()));
+            temp.put("id", player.getId());
+            temp.put("ready", player.isReadyState());
+            playerArray.put(temp);
         }
-        object.put("playerList", array);
+        JSONArray mapsArray = new JSONArray();
+        for(String name : Maps.getMapNames()){
+            JSONObject temp = new JSONObject();
+            temp.put("name", name);
+            mapsArray.put(temp);
+        }
+        object.put("playerList", playerArray);
+        object.put("mapList", mapsArray);
         return object;
     }
 
     public boolean changeRoomMaster(Player beforePlayer){
         Boolean isSuccess = false;
-
         for(Player player : playerList){
             if(roomMaster.getId().equals(beforePlayer.getId())){
                 roomMaster = beforePlayer;
@@ -141,5 +155,23 @@ public class Room {
         return isSuccess;
     }
 
+    public boolean isGamePossible() {
+        for(Player player : playerList){
+            if(player.equals(roomMaster) || player.isReadyState()){
+                continue;
+            }
+            return false;
+        }
+        return true;
+    }
 
+    public boolean chanegMap(String name){
+        this.map = Maps.getMapFromName(name);
+        if(map != null ) {
+            return true;
+        }else{
+            this.map = Maps.FIRST_MAP;
+            return false;
+        }
+    }
 }
