@@ -32,6 +32,7 @@ game start
 change ready
 {
     "type" : "change_ready",
+    "roomNum" : 2
 }
 change map
 {

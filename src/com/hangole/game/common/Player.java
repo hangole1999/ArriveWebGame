@@ -42,12 +42,11 @@ public class Player {
         this.characPositionY = y;
     }
 
-    public static JSONObject getPositionAsJSON(Session session){
+    public static JSONObject getPositionAsJSON(Room room, Session session){
         JSONObject message = new JSONObject();
-        JSONArray array = new JSONArray();
         message.put("type","Position");
-        message.put("x",getPlayerEqualSession(session).getPositionX());
-        message.put("y",getPlayerEqualSession(session).getPositionY());
+        message.put("x",room.getPlayerEqualSession(session).getPositionX());
+        message.put("y",room.getPlayerEqualSession(session).getPositionY());
 
         return message;
     }
@@ -97,7 +96,7 @@ public class Player {
     }
 
     public void minusHp(int amount){
-
+        this.hp -= amount;
     }
 
     public static Player getEqualPlayer(Player player) {
@@ -109,12 +108,5 @@ public class Player {
         return null;
     }
 
-    public static Player getPlayerEqualSession(Session session) {
-        for (Player player : Player.getPlayerList()) {
-            if (player.getSession().equals(session)) {
-                return player;
-            }
-        }
-        return null;
-    }
+
 }

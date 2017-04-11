@@ -174,4 +174,13 @@ public class Room {
             return false;
         }
     }
+
+    public Player getPlayerEqualSession(Session session) {
+        for (Player player : getPlayerList()) {
+            if (player.getSession().equals(session)) {
+                return player;
+            }
+        }
+        return null;
+    }
 }
