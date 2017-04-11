@@ -2,7 +2,7 @@ package example;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import javax.websocket.Session;
 
@@ -13,14 +13,5 @@ import static com.hangole.game.common.Player.getPlayerEqualSession;
  */
 public class JsonTest {
 
-    @Test
-    public static String getPositionAsJSON(Session session){
-        JSONObject message = new JSONObject();
-        JSONArray array = new JSONArray();
-        message.put("type","Position");
-        message.put("x",getPlayerEqualSession(session).getPositionX());
-        message.put("y",getPlayerEqualSession(session).getPositionY());
 
-        return message.toString();
-    }
 }

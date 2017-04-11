@@ -9,7 +9,15 @@ create new room (Client to Server)
 enter room (Client to Server)
 {
   "type" : "enter_room",
-  "rommNum" : 2,
+  "roomNum" : 2,
+}
+
+character position (Client to Server)
+{
+  "type" : "characterPosition",
+  "roomNum" : 2,
+  "x" : "(더블 형)",
+  "y" : "(더블 형)"
 }
 get out room
 {
@@ -55,7 +63,8 @@ send entire roomList (Server to Client)
 send character Position (Server to Client)
 {
    "type" : "characterPosition",
-   "x" : "(double 형)"
+   "roomNum" : 2,
+   "x" : "(double 형)",
    "y" : "(double 형)"
 }
 
