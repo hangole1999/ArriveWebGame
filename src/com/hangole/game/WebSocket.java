@@ -83,20 +83,26 @@ public class WebSocket {
                 Room targetRoom = MainPageController.findRoomFromNum(jsonObject.getInt("roomNum"));
                 if(targetRoom.isGamePossible()){
                     for(Player player : targetRoom.getPlayerList()){
-                        player.getSession().getBasicRemote().sendText(com.hangole.game.Util.makeSuccessLog("게임을 시작합니다."));
+                        player.getSession().getBasicRemote().sendText(MainPageController.getGameStartInform(targetRoom));
                     }
-
                 }else{
                     session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("레디를 안한 팀원이 있습니다."));
                 }
             }
             break;
+            case "change_map" :{
+                Room targetRoom = MainPageController.findRoomFromNum(jsonObject.getInt("roomNum"));
+                if(targetRoom.chanegMap(jsonObject.getString("name"))){
+                    session.getBasicRemote().sendText(com.hangole.game.Util.makeSuccessLog("Map 변경 성공"));
+                }else{
+                    session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("올바르지 않은 Map 이름입니다."));
+                }
+            }
             case "move_character":{
 
             }
         }
     }
-
     @OnClose
     public void onClose(Session session) {
         System.out.println("onClose()");

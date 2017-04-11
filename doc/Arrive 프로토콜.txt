@@ -11,6 +11,26 @@ enter room (Client to Server)
   "type" : "enter_room",
   "rommNum" : 2,
 }
+get out room
+{
+    "type" : "get_out_room",
+    "roomNum" : 2
+}
+game start
+{
+    "type" : "game_start",
+    "roomNum" : 2
+}
+change ready
+{
+    "type" : "change_ready",
+}
+change map
+{
+    "type" : "change_map",
+    "roomNum" : 2,
+    "name" : "firstMap"
+}
 
 ================ Server to Client
 send entire roomList (Server to Client)
@@ -34,6 +54,16 @@ send character Position (Server to Client)
    "y" : "(double 형)"
 }
 
+game inform ( 게임이 시작될 때 주는 정보 )
+{
+    "type" : "game_inform",
+    "map_json" : "dasdsadasdasdasdasdasdas",
+    "map_resources" : [
+        {"path" : "image/1.jpg"},
+        ...
+    ]
+}
+
 
 error (모든 에러 상황)
 {
@@ -47,9 +77,13 @@ room detail response
   "roomNum" : 2,
   "lock" : true,
   "playerNum" : 2,
-  "playerList" [
+  "playerList" : [
       { "id" : "jinseong" },
       { "id" : "keyhwang"}
+  ]
+  "roomList" : [
+      {"name" : "firstMap"},
+      ...
   ]
 }
 crea

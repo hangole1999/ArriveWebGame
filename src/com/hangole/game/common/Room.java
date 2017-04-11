@@ -22,6 +22,7 @@ public class Room {
     private String name;
     private String password;
     private Player roomMaster;
+    private Maps map = Maps.FIRST_MAP;
 
     public Room(String name, String password, Player roomMaster, boolean lock, int roomNum) {
         this.name = name;
@@ -67,6 +68,10 @@ public class Room {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Maps getMap(){
+        return this.map;
     }
 
     public boolean isLock() {
@@ -121,14 +126,21 @@ public class Room {
         object.put("lock", lock);
         object.put("playerNum", playerList.size());
         object.put("roomMaster", roomMaster.getId());
-        JSONArray array = new JSONArray();
+        JSONArray playerArray = new JSONArray();
         for(Player player : getPlayerList()){
             JSONObject temp = new JSONObject();
             temp.put("id", player.getId());
             temp.put("ready", player.isReadyState());
-            array.put(temp);
+            playerArray.put(temp);
         }
-        object.put("playerList", array);
+        JSONArray mapsArray = new JSONArray();
+        for(String name : Maps.getMapNames()){
+            JSONObject temp = new JSONObject();
+            temp.put("name", name);
+            mapsArray.put(temp);
+        }
+        object.put("playerList", playerArray);
+        object.put("mapList", mapsArray);
         return object;
     }
 
@@ -151,5 +163,15 @@ public class Room {
             return false;
         }
         return true;
+    }
+
+    public boolean chanegMap(String name){
+        this.map = Maps.getMapFromName(name);
+        if(map != null ) {
+            return true;
+        }else{
+            this.map = Maps.FIRST_MAP;
+            return false;
+        }
     }
 }
