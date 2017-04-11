@@ -18,6 +18,7 @@ public class Player {
     private boolean readyState;
     private double characPositionX = 0;
     private double characPositionY = 0;
+    private int hp;
 
     public Player(String id, boolean roomMaster, Session session) {
         this.id = id;
@@ -84,6 +85,18 @@ public class Player {
 
     public void changeReadyState() {
         this.readyState = !readyState;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public void minusHp(int amount){
+
     }
 
     public static Player getEqualPlayer(Player player) {

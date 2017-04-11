@@ -5,6 +5,7 @@ import com.hangole.game.common.Room;
 import com.hangole.game.controller.MainPageController;
 import com.hangole.server.session.Util;
 import org.json.JSONObject;
+import sun.applet.Main;
 
 import javax.servlet.http.HttpSession;
 import javax.websocket.*;
@@ -83,6 +84,7 @@ public class WebSocket {
                 Room targetRoom = MainPageController.findRoomFromNum(jsonObject.getInt("roomNum"));
                 if(targetRoom.isGamePossible()){
                     for(Player player : targetRoom.getPlayerList()){
+                        player.setHp(100);
                         player.getSession().getBasicRemote().sendText(MainPageController.getGameStartInform(targetRoom));
                     }
                 }else{
@@ -100,6 +102,14 @@ public class WebSocket {
             }
             case "move_character":{
 
+            }
+            break;
+            case "lose_hp":{
+                Room targetRoom = MainPageController.findRoomFromNum(jsonObject.getInt("roomNum"));
+                Player.getPlayerEqualSession(session).minusHp(15);
+                for(Player player : targetRoom.getPlayerList()){
+                    player.getSession().getBasicRemote().sendText(MainPageController.getPlayersHPInfo(targetRoom));
+                }
             }
         }
     }

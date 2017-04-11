@@ -59,6 +59,20 @@ public class MainPageController {
         return object.toString();
     }
 
+    public static String getPlayersHPInfo(Room room){
+        JSONObject object = new JSONObject();
+        object.put("type", "hp_inform");
+        JSONArray array = new JSONArray();
+        for(Player player : room.getPlayerList()){
+            JSONObject playerObject = new JSONObject();
+            playerObject.put("id", player.getId());
+            playerObject.put("hp", player.getHp());
+            array.put(playerObject);
+        }
+        object.put("user_list", array);
+        return object.toString();
+    }
+
     /*
     public static Room changeMaster(int roomNum, Session session){
         Room targetRoom = findRoomFromNum(roomNum);
