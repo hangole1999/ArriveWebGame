@@ -108,5 +108,13 @@ public class Player {
         return null;
     }
 
-
+    @Deprecated
+    public static Player getPlayerEqualSession(Session session) {
+        for (Player player : getPlayerList()) {
+            if (player.getSession().equals(session)) {
+                return player;
+            }
+        }
+        return null;
+    }
 }
