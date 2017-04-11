@@ -36,18 +36,18 @@ public class Player {
         this.characPositionY = x;
     }
 
-    public void setPosition(double y) {
+    public void setPositionY(double y) {
         this.characPositionY = y;
     }
 
-    public static String getPositionAsJSON(Session session){
+    public static JSONObject getPositionAsJSON(Session session){
         JSONObject message = new JSONObject();
         JSONArray array = new JSONArray();
         message.put("type","Position");
         message.put("x",getPlayerEqualSession(session).getPositionX());
         message.put("y",getPlayerEqualSession(session).getPositionY());
 
-        return message.toString();
+        return message;
     }
 
     public String getId() {

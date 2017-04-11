@@ -26,10 +26,8 @@
     <orderEntry type="library" name="JAX-WS-Apache Axis" level="project" />
     <orderEntry type="library" name="WebSocket-1.0" level="project" />
     <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
-    <orderEntry type="library" name="mongo-java-driver-3.4.0" level="project" />
     <orderEntry type="library" name="javax.servlet.jsp.jstl" level="project" />
     <orderEntry type="library" name="axis" level="project" />
-    <orderEntry type="library" name="junit-4.11" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -60,6 +58,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="mongo-java-driver-2.10.1" level="project" />
+    <orderEntry type="library" name="mongo" level="project" />
+    <orderEntry type="library" name="junit-4.10" level="project" />
   </component>
 </module>

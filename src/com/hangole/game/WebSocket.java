@@ -67,8 +67,27 @@ public class WebSocket {
                 }
             }
             break;
-            case "move_character":{
+            case "move_character": {
+                Room target = MainPageController.findRoomFromNum(jsonObject.getInt("roomNum"));
 
+                Player player = Player.getPlayerEqualSession(session);
+
+                if (target != null) {
+                    if (player != null) {
+                        player.setPositionX(jsonObject.getDouble("x"));
+                        player.setPositionY(jsonObject.getDouble("y"));
+
+                        ArrayList<Session> roomMembers = target.getPlayerSession();
+
+                        for (Session member : roomMembers) {
+                            member.getBasicRemote().sendText(Player.getPositionAsJSON(session).put("type", "characterPosition").toString());
+                        }
+                    }else{
+                        session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("player session 이 null"));
+                    }
+                }else{
+                    session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("Room 이 null"));
+                }
             }
         }
     }
