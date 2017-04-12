@@ -11,8 +11,8 @@ import java.util.ArrayList;
  */
 
 public class Room {
-
     private static ArrayList<Room> roomList = new ArrayList<>();
+    private static ArrayList<Room> playingRoomList = new ArrayList<>();
     private ArrayList<Player> playerList;
     private final int MAX_PLAYER = 4;
     private boolean lock;
@@ -41,6 +41,8 @@ public class Room {
     public static ArrayList<Room> getRoomList() {
         return roomList;
     }
+
+    public static ArrayList<Room> getPlayingRoomList(){return playingRoomList;}
 
     public int getRoomNum() {
         return roomNum;
@@ -81,6 +83,7 @@ public class Room {
     public static void addRoomToList(Room room) {
         roomList.add(room);
     }
+
 
     public static String getRoomListAsJSON() {
         JSONObject message = new JSONObject();
@@ -165,6 +168,11 @@ public class Room {
         return true;
     }
 
+    public boolean changeRoomToPlaying(Room room){
+        roomList.remove(room);
+        return playingRoomList.add(room);
+    }
+
     public boolean chanegMap(String name){
         this.map = Maps.getMapFromName(name);
         if(map != null ) {
@@ -173,5 +181,14 @@ public class Room {
             this.map = Maps.FIRST_MAP;
             return false;
         }
+    }
+
+    public Player getPlayerEqualSession(Session session) {
+        for (Player player : getPlayerList()) {
+            if (player.getSession().equals(session)) {
+                return player;
+            }
+        }
+        return null;
     }
 }

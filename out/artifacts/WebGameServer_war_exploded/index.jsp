@@ -1,3 +1,11 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: BeINone
+  Date: 2017-04-06
+  Time: 오후 2:03
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
   <link href="css/main.css" rel="stylesheet">
@@ -13,10 +21,10 @@
 <div class="login-form">
   <form action="login.do" method="post">
     <div>
-      <input type="text" placeholder="ID" class="input login-form__input" required autofocus>
+      <input type="text" placeholder="ID" class="input login-form__input" name="id" required autofocus>
     </div>
     <div>
-      <input type="password" placeholder="Password" class="input login-form__input" required>
+      <input type="password" placeholder="Password" class="input login-form__input" name="password" required>
     </div>
     <button type="submit" class="btn btn-lg login-form-signin">SIGN IN</button>
     <div class="login-form-sns">
@@ -41,12 +49,9 @@
       <form action="signup.do" method="post">
         <div class="modal-body">
           <div>
-            <input type="text" placeholder="ID" class="input signup-form__input" id="signup-form-id" name="id" required
-                   autofocus>
-            <input type="password" placeholder="Password" id="signup-form-password" class="input signup-form__input"
-                   name="password" required>
-            <input type="password" placeholder="Confirm password" id="signup-form-confirm"
-                   class="input signup-form__input" required>
+            <input type="text" placeholder="ID" class="input signup-form__input" id="signup-form-id" name="id" required autofocus>
+            <input type="password" placeholder="Password" id="signup-form-password" class="input signup-form__input" name="password" required>
+            <input type="password" placeholder="Confirm password" id="signup-form-confirm" class="input signup-form__input" required>
           </div>
         </div>
         <div class="modal-footer">

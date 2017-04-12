@@ -32,6 +32,7 @@ game start
 change ready
 {
     "type" : "change_ready",
+    "roomNum" : 2
 }
 
 change map
@@ -39,6 +40,11 @@ change map
     "type" : "change_map",
     "roomNum" : 2,
     "name" : "firstMap"
+}
+lose hp
+{
+    "type" : "lose_hp",
+    "roomNum" : 2
 }
 
 bullet position
@@ -87,7 +93,15 @@ game inform ( 게임이 시작될 때 주는 정보 )
         ...
     ]
 }
-
+hp inform
+{
+    "type" : "hp_inform",
+    "user_list": [
+        {"id" : "rlawlstjd",
+         "hp" : 80 },
+         ...
+    ]
+}
 
 error (모든 에러 상황)
 {

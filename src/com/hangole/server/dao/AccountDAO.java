@@ -21,7 +21,7 @@ public class AccountDAO {
             mongoClient.setWriteConcern(w);
             db = mongoClient.getDB("users");
             coll = db.getCollection("users");
-        }catch (UnknownHostException e){
+        } catch (UnknownHostException e) {
             e.printStackTrace();
         }
     }
@@ -51,7 +51,7 @@ public class AccountDAO {
             DBCursor cursor = coll.find();
             while (cursor.hasNext()) {
                 if (cursor.next().get("id").equals(id)) {
-                    System.out.println("이메일 중복!");
+                    System.out.println("아이디 중복!");
                     isOverlap = true;
                 }
             }

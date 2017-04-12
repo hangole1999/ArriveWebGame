@@ -4,7 +4,11 @@
     <option name="serverConfigurations">
       <list>
         <ServerConfiguration>
+<<<<<<< HEAD
           <option name="label" value="LocalHost" />
+=======
+          <option name="label" value="Localhost" />
+>>>>>>> origin/master
           <option name="serverUrls">
             <list>
               <option value="localhost:27017" />
