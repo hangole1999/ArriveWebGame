@@ -21,11 +21,6 @@
 <div class="login-form">
     <form action="login.do" method="post">
         <div>
-            <input type="text" placeholder="ID" name="id" class="input login-form__input" required autofocus>
-        </div>
-        <div>
-            <input type="password" placeholder="Password" name="password" class="input login-form__input" required>
-
             <input type="text" placeholder="ID" class="input login-form__input" name="id" required autofocus>
         </div>
         <div>
