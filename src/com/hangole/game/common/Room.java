@@ -11,8 +11,8 @@ import java.util.ArrayList;
  */
 
 public class Room {
+
     private static ArrayList<Room> roomList = new ArrayList<>();
-    private static ArrayList<Room> playingRoomList = new ArrayList<>();
     private ArrayList<Player> playerList;
     private final int MAX_PLAYER = 4;
     private boolean lock;
@@ -22,7 +22,6 @@ public class Room {
     private String name;
     private String password;
     private Player roomMaster;
-    private Maps map = Maps.FIRST_MAP;
 
     public Room(String name, String password, Player roomMaster, boolean lock, int roomNum) {
         this.name = name;
@@ -41,8 +40,6 @@ public class Room {
     public static ArrayList<Room> getRoomList() {
         return roomList;
     }
-
-    public static ArrayList<Room> getPlayingRoomList(){return playingRoomList;}
 
     public int getRoomNum() {
         return roomNum;
@@ -72,10 +69,6 @@ public class Room {
         this.password = password;
     }
 
-    public Maps getMap(){
-        return this.map;
-    }
-
     public boolean isLock() {
         return lock;
     }
@@ -83,7 +76,6 @@ public class Room {
     public static void addRoomToList(Room room) {
         roomList.add(room);
     }
-
 
     public static String getRoomListAsJSON() {
         JSONObject message = new JSONObject();
@@ -103,11 +95,10 @@ public class Room {
 
     public void addPlayer(Player player) {
         playerList.add(player);
-        player.setReadyState(false);
     }
 
-    public boolean removePlayer(Player player) {
-        return playerList.remove(player);
+    public void removePlayer(Player player) {
+        playerList.remove(player);
     }
 
     public ArrayList<Player> getPlayerList(){
@@ -122,33 +113,25 @@ public class Room {
         return sessionList;
     }
 
-    public JSONObject getRoomDetailInfomToJSON(){
+    public JSONObject getRoomInfomToJSON(){
         JSONObject object = new JSONObject();
         object.put("name", name);
         object.put("roomNum", roomNum);
         object.put("lock", lock);
         object.put("playerNum", playerList.size());
         object.put("roomMaster", roomMaster.getId());
-        JSONArray playerArray = new JSONArray();
+        JSONArray array = new JSONArray();
         for(Player player : getPlayerList()){
             JSONObject temp = new JSONObject();
-            temp.put("id", player.getId());
-            temp.put("ready", player.isReadyState());
-            playerArray.put(temp);
+            array.put(temp.put("id", player.getId()));
         }
-        JSONArray mapsArray = new JSONArray();
-        for(String name : Maps.getMapNames()){
-            JSONObject temp = new JSONObject();
-            temp.put("name", name);
-            mapsArray.put(temp);
-        }
-        object.put("playerList", playerArray);
-        object.put("mapList", mapsArray);
+        object.put("playerList", array);
         return object;
     }
 
     public boolean changeRoomMaster(Player beforePlayer){
         Boolean isSuccess = false;
+
         for(Player player : playerList){
             if(roomMaster.getId().equals(beforePlayer.getId())){
                 roomMaster = beforePlayer;
@@ -158,37 +141,5 @@ public class Room {
         return isSuccess;
     }
 
-    public boolean isGamePossible() {
-        for(Player player : playerList){
-            if(player.equals(roomMaster) || player.isReadyState()){
-                continue;
-            }
-            return false;
-        }
-        return true;
-    }
 
-    public boolean changeRoomToPlaying(Room room){
-        roomList.remove(room);
-        return playingRoomList.add(room);
-    }
-
-    public boolean chanegMap(String name){
-        this.map = Maps.getMapFromName(name);
-        if(map != null ) {
-            return true;
-        }else{
-            this.map = Maps.FIRST_MAP;
-            return false;
-        }
-    }
-
-    public Player getPlayerEqualSession(Session session) {
-        for (Player player : getPlayerList()) {
-            if (player.getSession().equals(session)) {
-                return player;
-            }
-        }
-        return null;
-    }
 }

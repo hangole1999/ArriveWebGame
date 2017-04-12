@@ -21,23 +21,27 @@ public class LoginController extends HttpServlet {
         System.out.println("login.do");
 
         req.setCharacterEncoding("euc-kr");
-        String id = req.getParameter("id");
-        String password = req.getParameter("password");
+
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
 
-        AccountDAO dao = AccountDAO.getInstance();
+        String id = req.getParameter("id");
+        String password = req.getParameter("password");
 
+        AccountDAO dao = AccountDAO.getInstance();
+System.out.println(id);
+System.out.println(password);
         String regPsw = dao.getPasswordFromID(id);
         if (regPsw == null || !regPsw.equals(password)) {
             System.out.println("Login Failed");
+            resp.sendRedirect("index.do");
         }else{
             HttpSession session = req.getSession();
             session.setAttribute("user", new User(id, password));
             System.out.println("Login Succeed");
             Util.addSession(session);
+            resp.sendRedirect("game.do");
         }
-        resp.sendRedirect("index.jsp");
     }
 
     @Override

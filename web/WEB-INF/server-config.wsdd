@@ -12,7 +12,7 @@
     <parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
     <requestFlow>
       <handler type="java:org.apache.axis.handlers.JWSHandler">
-        <parameter name="scope" value="session"/>
+        <parameter name="scope" value="com.hangole.server.session"/>
       </handler>
       <handler type="java:org.apache.axis.handlers.JWSHandler">
         <parameter name="scope" value="request"/>
@@ -40,13 +40,7 @@
     <parameter name="scope" value="Application"/>
     <parameter name="className" value="org.apache.axis.monitor.SOAPMonitorService"/>
   </service>
-    <service name="HelloWorld" provider="java:RPC" style="document" use="literal">
-        <parameter name="className" value="example.HelloWorld"/>
-        <parameter name="allowedMethods" value="*"/>
-        <parameter name="scope" value="Application"/>
-        <namespace>http://example</namespace>
-    </service>
-    <handler name="soapmonitor" type="java:org.apache.axis.handlers.SOAPMonitorHandler">
+  <handler name="soapmonitor" type="java:org.apache.axis.handlers.SOAPMonitorHandler">
     <parameter name="wsdlURL" value="/axis/SOAPMonitorService-impl.wsdl"/>
     <parameter name="serviceName" value="SOAPMonitorService"/>
     <parameter name="namespace" value="http://tempuri.org/wsdl/2001/12/SOAPMonitorService-impl.wsdl"/>

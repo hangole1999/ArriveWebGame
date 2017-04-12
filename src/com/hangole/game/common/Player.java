@@ -15,10 +15,8 @@ public class Player {
     private String id;
     private boolean roomMaster;
     private Session session;
-    private boolean readyState;
     private double characPositionX = 0;
     private double characPositionY = 0;
-    private int hp;
 
     public Player(String id, boolean roomMaster, Session session) {
         this.id = id;
@@ -38,17 +36,18 @@ public class Player {
         this.characPositionY = x;
     }
 
-    public void setPositionY(double y) {
+    public void setPosition(double y) {
         this.characPositionY = y;
     }
 
-    public static JSONObject getPositionAsJSON(Room room, Session session){
+    public static String getPositionAsJSON(Session session){
         JSONObject message = new JSONObject();
+        JSONArray array = new JSONArray();
         message.put("type","Position");
-        message.put("x",room.getPlayerEqualSession(session).getPositionX());
-        message.put("y",room.getPlayerEqualSession(session).getPositionY());
+        message.put("x",getPlayerEqualSession(session).getPositionX());
+        message.put("y",getPlayerEqualSession(session).getPositionY());
 
-        return message;
+        return message.toString();
     }
 
     public String getId() {
@@ -75,30 +74,6 @@ public class Player {
         return playerList;
     }
 
-    public boolean isReadyState() {
-        return readyState;
-    }
-
-    public void setReadyState(boolean readyState) {
-        this.readyState = readyState;
-    }
-
-    public void changeReadyState() {
-        this.readyState = !readyState;
-    }
-
-    public int getHp() {
-        return hp;
-    }
-
-    public void setHp(int hp) {
-        this.hp = hp;
-    }
-
-    public void minusHp(int amount){
-        this.hp -= amount;
-    }
-
     public static Player getEqualPlayer(Player player) {
         for (Player temp : Player.getPlayerList()) {
             if (temp.getSession().equals(player.getSession())) {
@@ -108,9 +83,8 @@ public class Player {
         return null;
     }
 
-    @Deprecated
     public static Player getPlayerEqualSession(Session session) {
-        for (Player player : getPlayerList()) {
+        for (Player player : Player.getPlayerList()) {
             if (player.getSession().equals(session)) {
                 return player;
             }
