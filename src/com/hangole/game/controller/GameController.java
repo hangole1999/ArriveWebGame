@@ -11,7 +11,7 @@ import javax.websocket.Session;
 /**
  * Created by dsm_025 on 2017-04-04.
  */
-public class MainPageController {
+public class GameController {
     public static Room createRoom(String name, Boolean lock, String password, Session session){
         Room room = new Room(name, password, Player.getPlayerEqualSession(session), lock, Room.getRoomList().size() + 1);
         Room.addRoomToList(room);
@@ -70,6 +70,20 @@ public class MainPageController {
             array.put(playerObject);
         }
         object.put("user_list", array);
+        return object.toString();
+    }
+
+    public static String getPlayerResult(Room room){
+        JSONObject object = new JSONObject();
+        object.put("type", "hp");
+        JSONArray array = new JSONArray();
+        for(Player player : room.getPlayerList()){
+            JSONObject killInform = new JSONObject();
+            killInform.put("id", player.getId());
+            killInform.put("kill", player.getKillCount());
+            array.put(killInform);
+        }
+        object.put("playerList", array);
         return object.toString();
     }
 

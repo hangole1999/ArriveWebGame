@@ -191,4 +191,13 @@ public class Room {
         }
         return null;
     }
+
+    public Player getPlayerEqualId(String id){
+        for (Player player : getPlayerList()) {
+            if (player.getId().equals(id)) {
+                return player;
+            }
+        }
+        return null;
+    }
 }

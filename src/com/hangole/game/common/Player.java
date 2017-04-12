@@ -19,6 +19,7 @@ public class Player {
     private double characPositionX = 0;
     private double characPositionY = 0;
     private int hp;
+    private int killCount;
 
     public Player(String id, boolean roomMaster, Session session) {
         this.id = id;
@@ -95,8 +96,21 @@ public class Player {
         this.hp = hp;
     }
 
-    public void minusHp(int amount){
+    public int getKillCount() {
+        return killCount;
+    }
+
+    public void setKillCount(int killCount) {
+        this.killCount = killCount;
+    }
+
+    public void upCountKill(){
+        this.killCount++;
+    }
+
+    public boolean minusHp(int amount){
         this.hp -= amount;
+        return  this.hp <= 0;
     }
 
     public static Player getEqualPlayer(Player player) {

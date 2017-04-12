@@ -43,6 +43,12 @@ change map
 lose hp
 {
     "type" : "lose_hp",
+    "roomNum" : 2,
+    "bullet_attacker" : "jinseong"
+}
+end game
+{
+    "type" : "end_game",
     "roomNum" : 2
 }
 
@@ -88,11 +94,6 @@ hp inform
     ]
 }
 
-error (모든 에러 상황)
-{
-  "type" : "error",
-  "message" : "방 인원이 가득찼습니다. "
-}
 room detail response
 {
   "type" : "room_detail",
@@ -109,4 +110,21 @@ room detail response
       ...
   ]
 }
-crea
+
+end game
+{
+    "type" : "end_game",
+    "playerList":[
+        {
+            "id" : "jinseong",
+            "kill" : 1,
+        }
+        ...
+    ]
+}
+
+error (모든 에러 상황)
+{
+  "type" : "error",
+  "message" : "방 인원이 가득찼습니다. "
+}
