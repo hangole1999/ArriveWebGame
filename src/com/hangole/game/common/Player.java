@@ -40,15 +40,15 @@ public class Player {
         this.characPositionY = y;
     }
 
-    public static String getPositionAsJSON(Session session){
-        JSONObject message = new JSONObject();
-        JSONArray array = new JSONArray();
-        message.put("type","characterPosition");
-
-        JSONObject object = new JSONObject();
-        object.put("x",getPlayerEqualSession(session).getPositionX());
-        object.put("y",getE)
-    }
+//    public static String getPositionAsJSON(Session session){
+//        JSONObject message = new JSONObject();
+//        JSONArray array = new JSONArray();
+//        message.put("type","characterPosition");
+//
+//        JSONObject object = new JSONObject();
+//        object.put("x",getPlayerEqualSession(session).getPositionX());
+//        object.put("y",getE)
+//    }
 
     public String getId() {
         return id;

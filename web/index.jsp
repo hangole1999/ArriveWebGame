@@ -21,10 +21,10 @@
 <div class="login-form">
   <form action="login.do" method="post">
     <div>
-      <input type="text" placeholder="ID" class="input login-form__input" required autofocus>
+      <input type="text" placeholder="ID" class="input login-form__input" name="id" required autofocus>
     </div>
     <div>
-      <input type="password" placeholder="Password" class="input login-form__input" required>
+      <input type="password" placeholder="Password" class="input login-form__input" name="password" required>
     </div>
     <button type="submit" class="btn btn-lg login-form-signin">SIGN IN</button>
     <div class="login-form-sns">
@@ -51,7 +51,10 @@
           <div>
             <input type="text" placeholder="ID" class="input signup-form__input" id="signup-form-id" name="id" required autofocus>
             <input type="password" placeholder="Password" id="signup-form-password" class="input signup-form__input" name="password" required>
-            <input type="password" placeholder="Confirm password" id="signup-form-confirm" class="input signup-form__input" required>
+            <div class="input-group">
+              <input type="password" placeholder="Confirm password" id="signup-form-confirm" class="input signup-form__input" required>
+              <i class="fa fa-times input-group-addon"></i>
+            </div>
           </div>
         </div>
         <div class="modal-footer">

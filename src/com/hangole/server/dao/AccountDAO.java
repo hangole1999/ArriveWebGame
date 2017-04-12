@@ -42,8 +42,8 @@ public class AccountDAO {
 
             DBCursor cursor = coll.find();
             while (cursor.hasNext()) {
-                if (cursor.next().get("email").equals(id)) {
-                    System.out.println("이메일 중복!");
+                if (cursor.next().get("id").equals(id)) {
+                    System.out.println("아이디 중복!");
                     isOverlap = true;
                 }
             }
