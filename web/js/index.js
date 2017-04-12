@@ -30,12 +30,15 @@ player.anchor.set(0.5);
 player.pivot.x = -50;
 player.scale.x = 0.3;
 player.scale.y = 0.3;
-player.speed = 3;
-player.bulletSpeed = 30;
+player.speed = 4;
+player.bulletSpeed = 50;
 player.rotation = 0;
 player.rotationDegrees = 0;
-player.destination = {position: {x: 1, y: 0}, rotation: 0, rotationDegrees: 0};
+player.destination = {position: {x: 1, y: 0}, rotation: 0};
 player.velocity = {x: 0, y: 0};
+player.lerpValue = 0.2;
+player.slerpValue = 0.2;
+player.rebound = 0.2;
 
 // move the sprite to the center of the screen
 player.x = app.renderer.width / 2;
@@ -61,9 +64,9 @@ app.ticker.add(function(delta) {
         player.velocity.x = 1;
     } else if (keyDowns[38] || keyDowns[40]) {
         player.destination.position.x = 0;
-        player.velocity.x = lerp(player.velocity.x, 0, 0.05);
+        player.velocity.x = lerp(player.velocity.x, 0, player.lerpValue);
     } else {
-        player.velocity.x = lerp(player.velocity.x, 0, 0.05);
+        player.velocity.x = lerp(player.velocity.x, 0, player.lerpValue);
     }
     if (keyDowns[38]) {
         player.destination.position.y = -1;
@@ -73,27 +76,18 @@ app.ticker.add(function(delta) {
         player.velocity.y = 1;
     } else if (keyDowns[37] || keyDowns[39]) {
         player.destination.position.y = 0;
-        player.velocity.y = lerp(player.velocity.y, 0, 0.05);
+        player.velocity.y = lerp(player.velocity.y, 0, player.lerpValue);
     } else {
-        player.velocity.y = lerp(player.velocity.y, 0, 0.05);
+        player.velocity.y = lerp(player.velocity.y, 0, player.lerpValue);
     }
 
     // Moving
     player.position.x += Math.cos(player.rotation) * Math.abs(player.velocity.x) * player.speed;
     player.position.y += Math.sin(player.rotation) * Math.abs(player.velocity.y) * player.speed;
-    // player.position.x += player.velocity.x * player.speed;
-    // player.position.y += player.velocity.y * player.speed;
 
     // Rotating
     player.destination.rotation = Math.atan2(player.destination.position.y, player.destination.position.x);
-    player.rotation = lerpAngle(player.rotation, player.destination.rotation, 0.1);
-    // player.rotation = player.destination.rotation;
-
-    // Degrees Rotation
-    // player.destination.rotationDegrees = player.destination.rotation * 180 / Math.PI;
-    // if (player.destination.rotationDegrees < 0)
-    //     player.destination.rotationDegrees = 360 + player.destination.rotationDegrees;
-    // player.rotationDegrees = player.destination.rotationDegrees;
+    player.rotation = slerp(player.rotation, player.destination.rotation, player.slerpValue);
 
     // Processing Bullets
     for(var i in bullets) {
@@ -108,6 +102,9 @@ app.ticker.add(function(delta) {
 });
 
 function shot(player) {
+    player.position.x -= Math.cos(player.rotation) * 1 + Math.cos(player.rotation) * player.bulletSpeed * player.rebound * Math.abs(player.velocity.x);
+    player.position.y -= Math.sin(player.rotation) * 1 + Math.sin(player.rotation) * player.bulletSpeed * player.rebound * Math.abs(player.velocity.y);
+
     var bullet = PIXI.Sprite.fromImage('assets/bullet.png');
     bullet.anchor.set(0.5);
     bullet.position = player.getGunPoint();
@@ -120,10 +117,17 @@ function shot(player) {
     bullets.push(bullet);
 }
 
-function lerpAngle(from, to, t) {
-    return lerp(from, to, t);
+function slerp(from, to, percent) {
+    var fromVector = {x: Math.cos(from), y: Math.sin(from)};
+    var toVector = {x: Math.cos(to), y: Math.sin(to)};
+
+    var equation = (toVector.y - from.y) / (toVector.x - fromVector.x);
+
+    var resultVector = {x: lerp(fromVector.x, toVector.x, percent), y: lerp(fromVector.y, toVector.y, percent)};
+
+    return Math.atan2(resultVector.y, resultVector.x);;
 }
 
-function lerp(from, to, t) {
-    return from + t * (to - from);
+function lerp(from, to, percent) {
+    return from + percent * (to - from);
 }

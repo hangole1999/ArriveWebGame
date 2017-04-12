@@ -28,13 +28,11 @@
         </div>
         <button type="submit" class="btn btn-lg login-form-signin">SIGN IN</button>
         <div class="login-form-sns">
-            <button type="button" class="btn btn-sm login-form-facebook"><i class="fa fa-facebook"></i> Sign in with
-                Facebook
+            <button type="button" class="btn btn-sm login-form-facebook"><i class="fa fa-facebook"></i> Sign in with Facebook
             </button>
             <button type="button" class="btn btn-sm login-form-google"><i class="fa fa-google"></i> Sign in with Google
             </button>
-            <button type="button" class="btn btn-sm login-form-twitter"><i class="fa fa-twitter"></i> Sign in with
-                Twitter
+            <button type="button" class="btn btn-sm login-form-twitter"><i class="fa fa-twitter"></i> Sign in with Twitter
             </button>
         </div>
         <a href="#signup-modal" id="signup__a" class="login-form-signup">You don't have an account? Join now!</a>
@@ -51,13 +49,9 @@
             <form action="signup.do" method="post">
                 <div class="modal-body">
                     <div>
-                        <input type="text" placeholder="ID" class="input signup-form__input" id="signup-form-id"
-                               name="id" required autofocus>
-                        <input type="password" placeholder="Password" id="signup-form-password"
-                               class="input signup-form__input" name="password" required>
-                        <div class="input-group">
-                            <i class="fa fa-times input-group-addon"></i>
-                        </div>
+                        <input type="text" placeholder="ID" class="input signup-form__input" id="signup-form-id" name="id" required autofocus>
+                        <input type="password" placeholder="Password" id="signup-form-password" class="input signup-form__input" name="password" required>
+                        <input type="password" placeholder="Confirm password" id="signup-form-confirm" class="input signup-form__input" required>
                     </div>
                 </div>
                 <div class="modal-footer">
