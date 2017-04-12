@@ -9,7 +9,41 @@ create new room (Client to Server)
 enter room (Client to Server)
 {
   "type" : "enter_room",
-  "rommNum" : 2,
+  "roomNum" : 2,
+}
+
+character position (Client to Server)
+{
+  "type" : "characterPosition",
+  "roomNum" : 2,
+  "x" : "(더블 형)",
+  "y" : "(더블 형)"
+}
+get out room
+{
+    "type" : "get_out_room",
+    "roomNum" : 2
+}
+game start
+{
+    "type" : "game_start",
+    "roomNum" : 2
+}
+change ready
+{
+    "type" : "change_ready",
+    "roomNum" : 2
+}
+change map
+{
+    "type" : "change_map",
+    "roomNum" : 2,
+    "name" : "firstMap"
+}
+lose hp
+{
+    "type" : "lose_hp",
+    "roomNum" : 2
 }
 
 ================ Server to Client
@@ -30,10 +64,29 @@ send entire roomList (Server to Client)
 send character Position (Server to Client)
 {
    "type" : "characterPosition",
-   "x" : "192"
-   "y" : "5"
+   "roomNum" : 2,
+   "x" : "(double 형)",
+   "y" : "(double 형)"
 }
 
+game inform ( 게임이 시작될 때 주는 정보 )
+{
+    "type" : "game_inform",
+    "map_json" : "dasdsadasdasdasdasdasdas",
+    "map_resources" : [
+        {"path" : "image/1.jpg"},
+        ...
+    ]
+}
+hp inform
+{
+    "type" : "hp_inform",
+    "user_list": [
+        {"id" : "rlawlstjd",
+         "hp" : 80 },
+         ...
+    ]
+}
 
 error (모든 에러 상황)
 {
@@ -47,9 +100,13 @@ room detail response
   "roomNum" : 2,
   "lock" : true,
   "playerNum" : 2,
-  "playerList" [
+  "playerList" : [
       { "id" : "jinseong" },
       { "id" : "keyhwang"}
+  ]
+  "roomList" : [
+      {"name" : "firstMap"},
+      ...
   ]
 }
 crea
