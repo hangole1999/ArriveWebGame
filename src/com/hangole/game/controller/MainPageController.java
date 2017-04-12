@@ -1,15 +1,11 @@
 package com.hangole.game.controller;
 
-import com.hangole.game.common.Maps;
 import com.hangole.game.common.Player;
 import com.hangole.game.common.Room;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.websocket.Session;
-
-import java.util.ArrayList;
-import java.util.Map;
 
 
 /**
@@ -23,19 +19,26 @@ public class MainPageController {
     }
 
     public static Room enterRoom(int roomNum, Session session){
-        Room targetRoom = findRoomFromNum(roomNum);
-
+        Room targetRoom = findRoomFromRoomList(roomNum);
         if(targetRoom != null){
             targetRoom.addPlayer(Player.getPlayerEqualSession(session));
             return targetRoom;
         }
-
         return null;
     }
 
-    public static Room findRoomFromNum(int rooNum){
+    public static Room findRoomFromPlayingRoomList(int roomNum){
+        for(Room room : Room.getPlayingRoomList()){
+            if(room.getRoomNum() == roomNum){
+                return room;
+            }
+        }
+        return null;
+    }
+
+    public static Room findRoomFromRoomList(int roomNum){
         for(Room room : Room.getRoomList()){
-            if(room.getRoomNum() == rooNum){
+            if(room.getRoomNum() == roomNum){
                 return room;
             }
         }
@@ -72,7 +75,7 @@ public class MainPageController {
 
     /*
     public static Room changeMaster(int roomNum, Session session){
-        Room targetRoom = findRoomFromNum(roomNum);
+        Room targetRoom = findRoomFromRoomList(roomNum);
 
         if(targetRoom != null){
             targetRoom.changeRoomMaster(Player.getPlayerEqualSession(session));
