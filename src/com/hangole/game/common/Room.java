@@ -84,7 +84,6 @@ public class Room {
         roomList.add(room);
     }
 
-
     public static String getRoomListAsJSON() {
         JSONObject message = new JSONObject();
         message.put("type", "entire_roomList");

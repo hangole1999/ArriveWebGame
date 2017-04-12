@@ -86,17 +86,4 @@ public class GameController {
         object.put("playerList", array);
         return object.toString();
     }
-
-    /*
-    public static Room changeMaster(int roomNum, Session session){
-        Room targetRoom = findRoomFromRoomList(roomNum);
-
-        if(targetRoom != null){
-            targetRoom.changeRoomMaster(Player.getPlayerEqualSession(session));
-            return targetRoom;
-        }
-        return null;
-    }
-    */
-
 }
