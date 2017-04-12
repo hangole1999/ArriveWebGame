@@ -1,6 +1,5 @@
 package com.hangole.game;
 
-import com.hangole.game.common.Player;
 import org.json.JSONObject;
 
 /**

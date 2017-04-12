@@ -1,15 +1,10 @@
 package com.hangole.game.controller;
 
-import com.hangole.game.common.Maps;
-import com.hangole.game.common.Player;
 import com.hangole.game.common.Room;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.websocket.Session;
-
-import java.util.ArrayList;
-import java.util.Map;
 
 import static com.hangole.game.common.Player.getPlayerEqualSession;
 

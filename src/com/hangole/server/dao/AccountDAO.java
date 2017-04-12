@@ -1,7 +1,6 @@
 package com.hangole.server.dao;
 
 import com.mongodb.*;
-import org.json.JSONObject;
 
 import java.net.UnknownHostException;
 
@@ -34,12 +33,15 @@ public class AccountDAO {
     public String getPasswordFromID(String id) {
         BasicDBObject basicDBObject = new BasicDBObject("id", id);
         basicDBObject.get("id");
+
+        System.out.println(basicDBObject);
+
         DBCursor cursor = coll.find(basicDBObject);
         BasicDBObject temp;
         if ((temp = (BasicDBObject) cursor.next()) == null) {
             return null;
         }
-        return temp.get("psw").toString();
+        return temp.get("password").toString();
     }
 
     public void insertSignUpInfo(String id, String pwd) {
@@ -48,11 +50,12 @@ public class AccountDAO {
 
             DBCursor cursor = coll.find();
             while (cursor.hasNext()) {
-                if (cursor.next().get("email").equals(id)) {
+                if (cursor.next().get("id").equals(id)) {
                     System.out.println("이메일 중복!");
                     isOverlap = true;
                 }
             }
+
 
             if (isOverlap == false) {
 

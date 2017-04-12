@@ -33,6 +33,7 @@ change ready
 {
     "type" : "change_ready",
 }
+
 change map
 {
     "type" : "change_map",
@@ -40,7 +41,21 @@ change map
     "name" : "firstMap"
 }
 
+bullet position
+{
+    "type" : "bullet_position",
+}
+
 ================ Server to Client
+
+send bullet position (Server to Client)
+{
+    "type" : "bullet_position",
+    "id" : "(아이디)",
+    "x" : "(더블 형)",
+    "y" : "(더블 형)"
+}
+
 send entire roomList (Server to Client)
 {
   "type" : "entire_roomList",
@@ -95,4 +110,3 @@ room detail response
       ...
   ]
 }
-crea

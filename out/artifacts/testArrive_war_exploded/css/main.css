@@ -1,0 +1,241 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Regular.ttf') format('truetype');
+}
+
+body {
+    margin: 0;
+    background-color: #FAFAFA;
+}
+
+body * {
+    font-family: 'Roboto', sans-serif;
+}
+
+header {
+    background-color: #F5F5F5;
+}
+
+.title {
+    height: 64px;
+    line-height: 64px;
+    text-align: center;
+}
+
+.title > h1 {
+    color: #9C27B0;
+}
+
+.card {
+    box-shadow: 0 1px 5px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.38);
+}
+
+.modal-dialog {
+    display: inherit;
+    position: fixed;
+    width: 500px;
+    height: 400px;
+    top: 50%;
+    left: 50%;
+    margin-top: -200px;
+    margin-left: -250px;
+    background-color: white;
+}
+
+.modal-header {
+    display: inline-block;
+    width: 100%;
+    height: 15%;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.modal-body {
+    display: flex;
+    width: 100%;
+    height: 60%;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-footer {
+    width: 100%;
+    height: 20%;
+    border-top: 1px solid #e5e5e5;
+}
+
+.input {
+    border: 2px solid rgba(0, 0, 0, 0.38);
+    -webkit-transition: border 0.2s;
+    transition: border 0.2s;
+}
+
+.input:focus {
+    outline: none;
+    border: 2px solid #9C27B0;
+}
+
+.btn {
+    font-size: 1.5em;
+    background-color: #9C27B0;
+    color: white;
+    border: 2px solid #9C27B0;
+    -webkit-transition: background-color 0.2s, color 0.2s;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn:hover {
+    background-color: white;
+    color: #9C27B0;
+    border: 2px solid #9C27B0;
+    cursor: pointer;
+}
+
+.btn-lg {
+    width: 500px;
+    height: 80px;
+}
+
+.btn-sm {
+    height: 40px;
+    font-size: 0.8em;
+}
+
+.btn-sm > i {
+    width: 20px;
+}
+
+.login-form {
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    /* align horizontal */
+    align-items: center;
+    /* align vertical */
+    text-align: center;
+    border: 0;
+}
+
+.login-form__input {
+    width: 500px;
+    font-size: 1em;
+    padding: 1em;
+    margin-bottom: 30px;
+}
+
+.login-form-signin {
+    margin-bottom: 15px;
+}
+
+.login-form-facebook {
+    background-color: #3b5998;
+    color: white;
+    border: 2px solid #3b5998;
+    -webkit-transition: background-color 0.2s, color 0.2s;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.login-form-facebook:hover {
+    background-color: white;
+    color: #3b5998;
+    border: 2px solid #3b5998;
+}
+
+.login-form-google {
+    background-color: #d62d20;
+    color: white;
+    border: 2px solid #d62d20;
+    -webkit-transition: background-color 0.2s, color 0.2s;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.login-form-google:hover {
+    background-color: white;
+    color: #d62d20;
+    border: 2px solid #d62d20;
+}
+
+.login-form-twitter {
+    background-color: #00aced;
+    color: white;
+    border: 2px solid #00aced;
+    -webkit-transition: background-color 0.2s, color 0.2s;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.login-form-twitter:hover {
+    background-color: white;
+    color: #00aced;
+    border: 2px solid #00aced;
+}
+
+.login-form-sns {
+    margin-bottom: 50px;
+}
+
+.login-form-signup {
+    width: 500px;
+    height: 50px;
+    font-size: 1.2em;
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.54);
+    -webkit-transition: color 0.2s;
+    transition: color 0.2s;
+}
+
+.login-form-signup:hover {
+    color: black;
+}
+
+.signup-form__input {
+    width: 300px;
+    font-size: 0.8em;
+    padding: 0.8em;
+    margin-bottom: 10px;
+}
+
+.signup-form-signup {
+    width: 100%;
+    height: 100%;
+    font-size: 1.5em;
+}
+
+.modal-dialog-title {
+    height: 100%;
+    display: block;
+    text-align: center;
+}
+
+.modal-dialog-title > h3 {
+  margin: 0;
+  padding: 0;
+}
+
+.modal-dialog-close {
+    float: right;
+    padding: 10px;
+    color: rgba(0, 0, 0, 0.38);
+    -webkit-transition: color 0.2s;
+    transition: color 0.2s;
+}
+
+.modal-dialog-close:hover {
+    color: black;
+    cursor: pointer;
+}

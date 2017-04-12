@@ -82,13 +82,17 @@ public class WebSocket {
                         for (Session member : roomMembers) {
                             member.getBasicRemote().sendText(Player.getPositionAsJSON(session).put("type", "characterPosition").toString());
                         }
-                    }else{
+                    } else {
                         session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("player session 이 null"));
                     }
-                }else{
+                } else {
                     session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("Room 이 null"));
                 }
             }
+            case "bullet_position" {
+                
+            }
+            break;
         }
     }
 

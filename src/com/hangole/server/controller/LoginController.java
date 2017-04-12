@@ -1,5 +1,6 @@
 package com.hangole.server.controller;
 
+import com.hangole.server.dao.AccountDAO;
 import com.hangole.server.session.User;
 import com.hangole.server.session.Util;
 
@@ -25,9 +26,9 @@ public class LoginController extends HttpServlet {
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
 
-//        AccountDAO dao = AccountDAO.getInstance();
+        AccountDAO dao = AccountDAO.getInstance();
 
-        String regPsw = password;//dao.getPasswordFromID(id);
+        String regPsw = dao.getPasswordFromID(id);
         if (regPsw == null || !regPsw.equals(password)) {
             System.out.println("Login Failed");
         }else{
