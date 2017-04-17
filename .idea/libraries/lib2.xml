@@ -1,0 +1,24 @@
+<component name="libraryTable">
+  <library name="lib2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/javax.websocket-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/tyrus-container-glassfish-cdi.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/tyrus-container-grizzly.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/tyrus-spi.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-logging-1.0.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/tyrus-client.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/axis.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-discovery-0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/wsdl4j-1.5.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/tyrus-websocket-core.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/tyrus-container-servlet.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/log4j-1.2.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jaxrpc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/tyrus-core.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/tyrus-server.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/saaj.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

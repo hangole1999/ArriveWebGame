@@ -10,16 +10,17 @@ import java.util.ArrayList;
 /**
  * Created by dsm_025 on 2017-04-03.
  */
+
 public class Player {
     private static ArrayList<Player> playerList = new ArrayList<>();
     private String id;
     private boolean roomMaster;
     private Session session;
-    private boolean readyState;
     private double characPositionX = 0;
     private double characPositionY = 0;
     private int hp;
     private int killCount;
+
 
     public Player(String id, boolean roomMaster, Session session) {
         this.id = id;
@@ -36,19 +37,19 @@ public class Player {
     }
 
     public void setPositionX(double x) {
-        this.characPositionY = x;
+        this.characPositionX = x;
     }
 
-    public void setPositionY(double y) {
+    public void setPosition(double y) {
         this.characPositionY = y;
     }
 
-    public static JSONObject getPositionAsJSON(Room room, Session session){
+    public static String getPositionAsJSON(Session session){
         JSONObject message = new JSONObject();
         message.put("type","Position");
         message.put("x",room.getPlayerEqualSession(session).getPositionX());
         message.put("y",room.getPlayerEqualSession(session).getPositionY());
-        return message;
+        return message.toString();
     }
 
     public String getId() {
@@ -121,9 +122,8 @@ public class Player {
         return null;
     }
 
-    @Deprecated
     public static Player getPlayerEqualSession(Session session) {
-        for (Player player : getPlayerList()) {
+        for (Player player : Player.getPlayerList()) {
             if (player.getSession().equals(session)) {
                 return player;
             }

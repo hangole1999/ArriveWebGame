@@ -4,6 +4,7 @@ import com.hangole.game.common.Player;
 import com.hangole.game.common.Room;
 import com.hangole.game.controller.GameController;
 import com.hangole.server.session.Util;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.servlet.http.HttpSession;
@@ -23,10 +24,12 @@ public class WebSocket {
     @OnOpen
     public void onOpen(Session session, EndpointConfig config) throws IOException {
         System.out.println("onOnpen()");
+
         list.add(session);
         session.getBasicRemote().sendText(Room.getRoomListAsJSON());
         HttpSession httpSession = (HttpSession) config.getUserProperties()
                 .get(HttpSession.class.getName());
+
         Player player = new Player(Util.findEqualSessionId(httpSession), false, session);
         Player.addPlayerToList(player);
     }
@@ -36,36 +39,50 @@ public class WebSocket {
         System.out.println("onMessage(" + message + ")");
         JSONObject jsonObject = new JSONObject(message);
         switch (jsonObject.getString("type")) {
+
             case "create_room": {
+<<<<<<< HEAD
                 Room created_room = GameController.createRoom(jsonObject.getString("name"), jsonObject.getBoolean("lock"), jsonObject.getString("password"), session);
                 session.getBasicRemote().sendText(created_room.getRoomDetailInfomToJSON().put("type", "room_detail").toString());
+=======
+                Room created_room = MainPageController.createRoom(jsonObject.getString("name"), jsonObject.getBoolean("lock"), jsonObject.getString("password"), session);
+                session.getBasicRemote().sendText(created_room.getRoomInfomToJSON().put("type", "room_detail").toString());
+>>>>>>> origin/master
             }
             break;
+
             case "enter_room": {
                 Room entered_room = GameController.enterRoom(jsonObject.getInt("roomNum"), session);
                 if (entered_room != null) {
                     ArrayList<Session> roomMembers = entered_room.getPlayerSession();
                     for (Session member : roomMembers) {
-                        member.getBasicRemote().sendText(entered_room.getRoomDetailInfomToJSON().put("type", "room_detail").toString());
+                        member.getBasicRemote().sendText(entered_room.getRoomInfomToJSON().put("type", "room_detail").toString());
                     }
                 } else {
                     session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("방 인원이 가득 찼습니다."));
                 }
             }
             break;
+
             case "change_master": {
+<<<<<<< HEAD
                 Room targetRoom = GameController.findRoomFromRoomList(jsonObject.getInt("roomNum"));
+=======
+                Room targetRoom = MainPageController.findRoomFromNum(jsonObject.getInt("roomNum"));
+
+>>>>>>> origin/master
                 if (targetRoom != null) {
-                    Boolean isSuccess = targetRoom.changeRoomMaster(targetRoom.getPlayerEqualSession(session));
+                    Boolean isSuccess = targetRoom.changeRoomMaster(Player.getPlayerEqualSession(session));
 
                     if (isSuccess == true) {
-                        session.getBasicRemote().sendText(targetRoom.getRoomDetailInfomToJSON().put("type", "room_detail").toString());
+                        session.getBasicRemote().sendText(targetRoom.getRoomInfomToJSON().put("type", "room_detail").toString());
                     } else {
                         session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("방장 변경에 실패했습니다."));
                     }
                 }
             }
             break;
+<<<<<<< HEAD
             case "change_ready" : {
                 Room targetRoom = GameController.findRoomFromRoomList(jsonObject.getInt("roomNum"));
                 targetRoom.getPlayerEqualSession(session).changeReadyState();
@@ -105,25 +122,23 @@ public class WebSocket {
             case "move_character": {
                 Room target = GameController.findRoomFromPlayingRoomList(jsonObject.getInt("roomNum"));
                 Player player = target.getPlayerEqualSession(session);
+=======
+>>>>>>> origin/master
 
-                if (target != null) {
-                    if (player != null) {
-                        player.setPositionX(jsonObject.getDouble("x"));
-                        player.setPositionY(jsonObject.getDouble("y"));
+            case "characterPosition": {
+                Room targetRoom = MainPageController.findRoomFromNum(jsonObject.getInt("roomNum"));
 
-                        ArrayList<Session> roomMembers = target.getPlayerSession();
+                if (targetRoom != null) {
+                    double characterX = jsonObject.getInt("x");
+                    double characterY = jsonObject.getInt("y");
 
-                        for (Session member : roomMembers) {
-                            member.getBasicRemote().sendText(Player.getPositionAsJSON(target, session).put("type", "characterPosition").toString());
-                        }
-                    }else{
-                        session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("player session 이 null"));
-                    }
-                }else{
-                    session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("Room 이 null"));
+                    session.getBasicRemote().sendText(Player.getPositionAsJSON(session));
+                } else {
+                    session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("좌표 보내기 실패"));
                 }
             }
             break;
+<<<<<<< HEAD
             case "lose_hp":{
                 Room targetRoom = GameController.findRoomFromPlayingRoomList(jsonObject.getInt("roomNum"));
                 if(targetRoom.getPlayerEqualSession(session).minusHp(15)){
@@ -142,8 +157,14 @@ public class WebSocket {
                 for(Player player : targetRoom.getPlayerList()){
                     player.getSession().getBasicRemote().sendText(result);
                 }
+=======
+
+            case "bullet_position": {
+                session.getBasicRemote().sendText(message);
+>>>>>>> origin/master
             }
             break;
+
         }
     }
 

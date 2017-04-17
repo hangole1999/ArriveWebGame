@@ -5,7 +5,6 @@ import org.json.JSONObject;
 
 import java.net.UnknownHostException;
 
-
 /**
  * Created by dsm_025 on 2017-03-27.
  */
@@ -32,14 +31,19 @@ public class AccountDAO {
     }
 
     public String getPasswordFromID(String id) {
-        BasicDBObject basicDBObject = new BasicDBObject("id", id);
-        basicDBObject.get("id");
-        DBCursor cursor = coll.find(basicDBObject);
-        BasicDBObject temp;
-        if ((temp = (BasicDBObject) cursor.next()) == null) {
-            return null;
+        try {
+            BasicDBObject basicDBObject = new BasicDBObject("id", id);
+            basicDBObject.get("id");
+            DBCursor cursor = coll.find(basicDBObject);
+            BasicDBObject temp;
+            if ((temp = (BasicDBObject) cursor.next()) == null) {
+                return null;
+            }
+            return temp.get("password").toString();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return temp.get("psw").toString();
+        return null;
     }
 
     public void insertSignUpInfo(String id, String pwd) {
@@ -49,7 +53,7 @@ public class AccountDAO {
             DBCursor cursor = coll.find();
             while (cursor.hasNext()) {
                 if (cursor.next().get("id").equals(id)) {
-                    System.out.println("아이디 중복!");
+                    System.out.println("이메일 중복!");
                     isOverlap = true;
                 }
             }
