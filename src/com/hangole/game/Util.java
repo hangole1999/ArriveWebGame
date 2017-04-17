@@ -8,11 +8,17 @@ import org.json.JSONObject;
  */
 public class Util {
 
+    public static String makeSuccessLog(String message){
+        JSONObject object = new JSONObject();
+        object.put("type", "success");
+        object.put("message", message);
+        return object.toString();
+    }
 
     public static String makeErrorLog(String message){
         JSONObject object = new JSONObject();
         object.put("type", "error");
-        object.put("mseeage", message);
+        object.put("message", message);
         return object.toString();
     }
 }

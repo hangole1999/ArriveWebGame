@@ -20,7 +20,7 @@ public class GameController {
     }
 
     public static Room enterRoom(int roomNum, Session session){
-        Room targetRoom = findRoomFromNum(roomNum);
+        Room targetRoom = findRoomFromRoomList(roomNum);
 
         if(targetRoom != null){
             targetRoom.addPlayer(getPlayerEqualSession(session));
@@ -31,7 +31,7 @@ public class GameController {
     }
 
 
-    public static Room findRoomFromNum(int rooNum){
+    public static Room findRoomFromRoomList(int rooNum){
         for(Room room : Room.getRoomList()){
             if(room.getRoomNum() == rooNum){
                 return room;
@@ -81,9 +81,18 @@ public class GameController {
         object.put("user_list", array);
         return object.toString();
     }
+
+    public static Room findRoomFromPlayingRoomList(int roomNum){
+        for(Room room : Room.getPlayingRoomList()){
+            if(room.getRoomNum() == roomNum){
+                return room;
+            }
+        }
+        return null;
+    }
     /*
     public static Room changeMaster(int roomNum, Session session){
-        Room targetRoom = findRoomFromNum(roomNum);
+        Room targetRoom = findRoomFromRoomList(roomNum);
 
         if(targetRoom != null){
             targetRoom.changeRoomMaster(Player.getPlayerEqualSession(session));

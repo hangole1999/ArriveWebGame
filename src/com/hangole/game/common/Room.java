@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class Room {
 
     private static ArrayList<Room> roomList = new ArrayList<>();
+    private static ArrayList<Room> playingRoomList = new ArrayList<>();
     private ArrayList<Player> playerList;
     private final int MAX_PLAYER = 4;
     private boolean lock;
@@ -41,6 +42,11 @@ public class Room {
     public static ArrayList<Room> getRoomList() {
         return roomList;
     }
+
+    public static ArrayList<Room> getPlayingRoomList() {
+        return roomList;
+    }
+
 
     public int getRoomNum() {
         return roomNum;
@@ -143,8 +149,8 @@ public class Room {
         playerList.add(player);
     }
 
-    public void removePlayer(Player player) {
-        playerList.remove(player);
+    public boolean removePlayer(Player player) {
+        return playerList.remove(player);
     }
 
     public ArrayList<Player> getPlayerList(){
@@ -197,5 +203,20 @@ public class Room {
             }
         }
         return null;
+    }
+
+    public boolean isGamePossible() {
+        for(Player player : playerList){
+            if(player.equals(roomMaster) || player.isReadyState()){
+                continue;
+            }
+            return false;
+        }
+        return true;
+    }
+
+    public boolean changeRoomToPlaying(Room room){
+        roomList.remove(room);
+        return playingRoomList.add(room);
     }
 }

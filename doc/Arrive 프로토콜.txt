@@ -1,81 +1,16 @@
-=============== Client to Server ===========
+====================== Game Create =====================
 create new room (Client to Server)
 {
   "type" : "create_room",
   "name" : "jinseong's room",
-  "password" : 1234,
+  "password" : "1234",
   "lock" : true
 }
-
-enter room (Client to Server)
+refresh(Client to Server)
 {
-  "type" : "enter_room",
-  "roomNum" : 2,
+    "type" : "refresh_list"
 }
-
-character position (Client to Server)
-{
-  "type" : "characterPosition",
-  "roomNum" : 2,
-  "x" : "(더블 형)",
-  "y" : "(더블 형)"
-}
-
-get out room
-{
-    "type" : "get_out_room",
-    "roomNum" : 2
-}
-
-game start
-{
-    "type" : "game_start",
-    "roomNum" : 2
-}
-
-change ready
-{
-    "type" : "change_ready",
-    "roomNum" : 2
-}
-
-change map
-{
-    "type" : "change_map",
-    "roomNum" : 2,
-    "name" : "firstMap"
-}
-
-lose hp
-{
-    "type" : "lose_hp",
-    "roomNum" : 2,
-    "bullet_attacker" : "jinseong"
-}
-end game
-{
-    "type" : "end_game",
-    "roomNum" : 2
-}
-
-bullet position
-{
-    "type" : "bullet_position",
-    "x" : (double),
-    "y" : (double)
-}
-
-================ Server to Client
-
-send bullet position (Server to Client)
-{
-    "type" : "bullet_position",
-    "id" : "(아이디)",
-    "x" : "(더블 형)",
-    "y" : "(더블 형)"
-}
-
-send entire roomList (Server to Client)
+send entire roomList (Server to Client) ex) 맨 처음 접속 했을 때 or refresh를 했을 때
 {
   "type" : "entire_roomList",
   "roomList" : [
@@ -88,15 +23,70 @@ send entire roomList (Server to Client)
     ...
   ]
 }
-
-send character Position (Server to Client)
+======================== Game enter =====================
+room detail response
 {
-   "type" : "characterPosition",
-   "roomNum" : 2,
-   "x" : "(double 형)",
-   "y" : "(double 형)"
+  "type" : "room_detail",
+  "name" : "jinseong's room",
+  "roomNum" : 2,
+  "lock" : true,
+  "playerNum" : 2,
+  "roomMaster" : "jinseong",
+  "playerList" : [
+      { "id" : "jinseong" },
+      { "id" : "keyhwang"}
+  ]
+  "mapList" : [
+      {"name" : "firstMap"},
+      ...
+  ]
 }
-
+enter room (Client to Server)
+{
+  "type" : "enter_room",
+  "roomNum" : 2,
+}
+enter room response{
+    "type" : "enter_room_response",
+    "state" : "success", (error일 때는 error 로 뜸)
+    "message" : "ㅇㅁㄴㅇㅁㄴ"
+}
+get out room
+{
+    "type" : "get_out_room",
+    "roomNum" : 2
+}
+get out room response
+{
+    "type" : "get_out_room_response",
+    "state": "success" or "error",
+    "message" : "dasdasdasds"
+}
+===================== Setting when entered Room ===================
+change ready
+{
+    "type" : "change_ready",
+    "roomNum" : 2
+}
+change ready response
+{
+    "type" : "change_ready_response",
+    "state" : "success" or "error",
+    "roomNum" : 2
+}
+change map
+{
+    "type" : "change_map",
+    "roomNum" : 2,
+    "name" : "firstMap"
+}
+change map response
+{
+    "type" : "change_ready_response",
+    "state" : "success" or "error",
+    "message" : "sdasdadasd"
+}
+======================= Game Start =================
 game inform ( 게임이 시작될 때 주는 정보 )
 {
     "type" : "game_inform",
@@ -106,7 +96,26 @@ game inform ( 게임이 시작될 때 주는 정보 )
         ...
     ]
 }
+game start
+{
+    "type" : "game_start",
+    "roomNum" : 2
+}
 
+==================== Playing Game ===============================
+character position (Client to Server)
+{
+  "type" : "characterPosition",
+  "roomNum" : 2,
+  "x" : "(더블 형)",
+  "y" : "(더블 형)"
+}
+lose hp
+{
+    "type" : "lose_hp",
+    "roomNum" : 2,
+    "bullet_attacker" : "jinseong"
+}
 hp inform
 {
     "type" : "hp_inform",
@@ -116,29 +125,26 @@ hp inform
          ...
     ]
 }
-
-error (모든 에러 상황)
+end game
 {
-  "type" : "error",
-  "message" : "방 인원이 가득찼습니다. "
+    "type" : "end_game",
+    "roomNum" : 2
 }
 
-room detail response
+bullet position
 {
-  "type" : "room_detail",
-  "name" : "jinseong's room",
-  "roomNum" : 2,
-  "lock" : true,
-  "playerNum" : 2,
-  "playerList" : [
-      { "id" : "jinseong" },
-      { "id" : "keyhwang"}
-  ]
-  "roomList" : [
-      {"name" : "firstMap"},
-      ...
-  ]
+    "type" : "bullet_position",
+    "x" : (double),
+    "y" : (double)
 }
+send bullet position (Server to Client)
+{
+    "type" : "bullet_position",
+    "id" : "(아이디)",
+    "x" : "(더블 형)",
+    "y" : "(더블 형)"
+}
+
 
 end game
 {
@@ -151,16 +157,10 @@ end game
         ...
     ]
 }
-
-error (모든 에러 상황)
+send character Position (Server to Client)
 {
-  "type" : "error",
-  "message" : "방 인원이 가득찼습니다. "
-}
-
-bullet position
-{
-    "type" : "bullet_position",
-    "x" : (double),
-    "y" : (double)
+   "type" : "characterPosition",
+   "roomNum" : 2,
+   "x" : "(double 형)",
+   "y" : "(double 형)"
 }
