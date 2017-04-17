@@ -7,6 +7,14 @@ var webSocket = new WebSocket("ws://localhost:8882/game");
 webSocket.onopen = function(message){
     console.log('onopen('+message+')');
     console.log(message);
+
+    var createRoom = {
+        type : "create_room",
+        name : "jinseong's room",
+        password : "1234",
+        lock : true
+    };
+    webSocket.send(JSON.stringify(createRoom));
 };
 webSocket.onclose = function(message){
     console.log('onclose('+message+')');
