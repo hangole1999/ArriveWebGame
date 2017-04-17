@@ -4,6 +4,7 @@ import com.hangole.game.common.Player;
 import com.hangole.game.common.Room;
 import com.hangole.game.controller.MainPageController;
 import com.hangole.server.session.Util;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.servlet.http.HttpSession;
@@ -38,11 +39,13 @@ public class WebSocket {
         System.out.println("onMessage(" + message + ")");
         JSONObject jsonObject = new JSONObject(message);
         switch (jsonObject.getString("type")) {
+
             case "create_room": {
                 Room created_room = MainPageController.createRoom(jsonObject.getString("name"), jsonObject.getBoolean("lock"), jsonObject.getString("password"), session);
                 session.getBasicRemote().sendText(created_room.getRoomInfomToJSON().put("type", "room_detail").toString());
             }
             break;
+
             case "enter_room": {
                 Room entered_room = MainPageController.enterRoom(jsonObject.getInt("roomNum"), session);
                 if (entered_room != null) {
@@ -55,6 +58,7 @@ public class WebSocket {
                 }
             }
             break;
+
             case "change_master": {
                 Room targetRoom = MainPageController.findRoomFromNum(jsonObject.getInt("roomNum"));
 
@@ -69,6 +73,7 @@ public class WebSocket {
                 }
             }
             break;
+
             case "characterPosition": {
                 Room targetRoom = MainPageController.findRoomFromNum(jsonObject.getInt("roomNum"));
 
@@ -77,10 +82,15 @@ public class WebSocket {
                     double characterY = jsonObject.getInt("y");
 
                     session.getBasicRemote().sendText(Player.getPositionAsJSON(session));
-                }else{
+                } else {
                     session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("좌표 보내기 실패"));
                 }
             }
+
+            case "bullet_position": {
+                session.getBasicRemote().sendText(message);
+            }
+
         }
     }
 

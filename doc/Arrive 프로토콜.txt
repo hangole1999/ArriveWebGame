@@ -6,6 +6,7 @@ create new room (Client to Server)
   "password" : 1234,
   "lock" : true
 }
+
 enter room (Client to Server)
 {
   "type" : "enter_room",
@@ -19,16 +20,19 @@ character position (Client to Server)
   "x" : "(더블 형)",
   "y" : "(더블 형)"
 }
+
 get out room
 {
     "type" : "get_out_room",
     "roomNum" : 2
 }
+
 game start
 {
     "type" : "game_start",
     "roomNum" : 2
 }
+
 change ready
 {
     "type" : "change_ready",
@@ -41,6 +45,7 @@ change map
     "roomNum" : 2,
     "name" : "firstMap"
 }
+
 lose hp
 {
     "type" : "lose_hp",
@@ -50,6 +55,8 @@ lose hp
 bullet position
 {
     "type" : "bullet_position",
+    "x" : (double),
+    "y" : (double)
 }
 
 ================ Server to Client
@@ -93,6 +100,7 @@ game inform ( 게임이 시작될 때 주는 정보 )
         ...
     ]
 }
+
 hp inform
 {
     "type" : "hp_inform",
@@ -108,6 +116,7 @@ error (모든 에러 상황)
   "type" : "error",
   "message" : "방 인원이 가득찼습니다. "
 }
+
 room detail response
 {
   "type" : "room_detail",
@@ -123,4 +132,11 @@ room detail response
       {"name" : "firstMap"},
       ...
   ]
+}
+
+bullet position
+{
+    "type" : "bullet_position",
+    "x" : (double),
+    "y" : (double)
 }
