@@ -93,6 +93,22 @@ public class Room {
         return message.toString();
     }
 
+    public JSONObject getRoomInfomToJSON(){
+        JSONObject object = new JSONObject();
+        object.put("name", name);
+        object.put("roomNum", roomNum);
+        object.put("lock", lock);
+        object.put("playerNum", playerList.size());
+        object.put("roomMaster", roomMaster.getId());
+        JSONArray array = new JSONArray();
+        for(Player player : getPlayerList()){
+            JSONObject temp = new JSONObject();
+            array.put(temp.put("id", player.getId()));
+        }
+        object.put("playerList", array);
+        return object;
+    }
+
     public void addPlayer(Player player) {
         playerList.add(player);
     }
@@ -111,22 +127,6 @@ public class Room {
             sessionList.add(player.getSession());
         }
         return sessionList;
-    }
-
-    public JSONObject getRoomInfomToJSON(){
-        JSONObject object = new JSONObject();
-        object.put("name", name);
-        object.put("roomNum", roomNum);
-        object.put("lock", lock);
-        object.put("playerNum", playerList.size());
-        object.put("roomMaster", roomMaster.getId());
-        JSONArray array = new JSONArray();
-        for(Player player : getPlayerList()){
-            JSONObject temp = new JSONObject();
-            array.put(temp.put("id", player.getId()));
-        }
-        object.put("playerList", array);
-        return object;
     }
 
     public boolean changeRoomMaster(Player beforePlayer){

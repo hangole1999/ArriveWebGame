@@ -23,10 +23,12 @@ public class WebSocket {
     @OnOpen
     public void onOpen(Session session, EndpointConfig config) throws IOException {
         System.out.println("onOnpen()");
+
         list.add(session);
         session.getBasicRemote().sendText(Room.getRoomListAsJSON());
         HttpSession httpSession = (HttpSession) config.getUserProperties()
                 .get(HttpSession.class.getName());
+
         Player player = new Player(Util.findEqualSessionId(httpSession), false, session);
         Player.addPlayerToList(player);
     }
@@ -67,8 +69,17 @@ public class WebSocket {
                 }
             }
             break;
-            case "move_character":{
+            case "characterPosition": {
+                Room targetRoom = MainPageController.findRoomFromNum(jsonObject.getInt("roomNum"));
 
+                if (targetRoom != null) {
+                    double characterX = jsonObject.getInt("x");
+                    double characterY = jsonObject.getInt("y");
+
+                    session.getBasicRemote().sendText(Player.getPositionAsJSON(session));
+                }else{
+                    session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("좌표 보내기 실패"));
+                }
             }
         }
     }

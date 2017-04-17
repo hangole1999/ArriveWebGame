@@ -10,6 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by dsm_025 on 2017-04-03.
  */
+
 public class Player {
     private static ArrayList<Player> playerList = new ArrayList<>();
     private String id;
@@ -33,7 +34,7 @@ public class Player {
     }
 
     public void setPositionX(double x) {
-        this.characPositionY = x;
+        this.characPositionX = x;
     }
 
     public void setPosition(double y) {
@@ -43,7 +44,7 @@ public class Player {
     public static String getPositionAsJSON(Session session){
         JSONObject message = new JSONObject();
         JSONArray array = new JSONArray();
-        message.put("type","Position");
+        message.put("type","characterPosition");
         message.put("x",getPlayerEqualSession(session).getPositionX());
         message.put("y",getPlayerEqualSession(session).getPositionY());
 
