@@ -86,10 +86,12 @@ public class WebSocket {
                     session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("좌표 보내기 실패"));
                 }
             }
+            break;
 
             case "bullet_position": {
                 session.getBasicRemote().sendText(message);
             }
+            break;
 
         }
     }
