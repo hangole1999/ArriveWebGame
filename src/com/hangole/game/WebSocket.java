@@ -104,7 +104,6 @@ public class WebSocket {
             }
             case "move_character": {
                 Room target = GameController.findRoomFromPlayingRoomList(jsonObject.getInt("roomNum"));
-
                 Player player = target.getPlayerEqualSession(session);
 
                 if (target != null) {
