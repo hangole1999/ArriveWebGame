@@ -152,6 +152,10 @@ function Character(position) {
         }
     }
 
+    this.interpolation = function(transform) {
+
+    }
+
     // Add to Characters List
     characters.push(this);
 
