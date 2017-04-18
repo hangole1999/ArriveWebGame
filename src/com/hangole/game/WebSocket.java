@@ -50,7 +50,7 @@ public class WebSocket {
                     ArrayList<Session> roomMembers = entered_room.getPlayerSession();
                     entered_room.getPlayerEqualSession(session).setEnterState(true);
                     for (Session member : roomMembers) {
-                        member.getBasicRemote().sendText(entered_room.getRoomInfomToJSON().put("type", "room_detail").toString());
+                        member.getBasicRemote().sendText(entered_room.getRoomDetailInfomToJSON().put("type", "room_detail").toString());
                     }
                 } else {
                     session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("방 인원이 가득 찼습니다."));
@@ -103,7 +103,7 @@ public class WebSocket {
                 }else{
                     session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("올바르지 않은 Map 이름입니다."));
                 }
-            break;
+                break;
             case "characterPosition":
                 targetRoom = GameController.findRoomFromRoomList(jsonObject.getInt("roomNum"));
                 if (targetRoom != null) {
@@ -118,8 +118,8 @@ public class WebSocket {
             case "lose_hp":
                 targetRoom = GameController.findRoomFromPlayingRoomList(jsonObject.getInt("roomNum"));
                 if(targetRoom.getPlayerEqualSession(session).minusHp(15)){
-                   Player player = targetRoom.getPlayerEqualId(jsonObject.getString("bullet_attacker"));
-                   player.upCountKill();
+                    Player player = targetRoom.getPlayerEqualId(jsonObject.getString("bullet_attacker"));
+                    player.upCountKill();
                 }
                 for(Player player : targetRoom.getPlayerList()){
                     player.getSession().getBasicRemote().sendText(GameController.getPlayersHPInfo(targetRoom));
