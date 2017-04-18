@@ -35,7 +35,7 @@ public class Room {
         addPlayer(roomMaster);
     }
 
-    public Player getRoomMaster(){
+    public Player getRoomMaster() {
         return this.roomMaster;
     }
 
@@ -84,11 +84,11 @@ public class Room {
         roomList.add(room);
     }
 
-    public Maps getMap(){
+    public Maps getMap() {
         return this.map;
     }
 
-    public JSONObject getRoomDetailInfomToJSON(){
+    public JSONObject getRoomDetailInfomToJSON() {
         JSONObject object = new JSONObject();
         object.put("name", name);
         object.put("roomNum", roomNum);
@@ -96,14 +96,14 @@ public class Room {
         object.put("playerNum", playerList.size());
         object.put("roomMaster", roomMaster.getId());
         JSONArray playerArray = new JSONArray();
-        for(Player player : getPlayerList()){
+        for (Player player : getPlayerList()) {
             JSONObject temp = new JSONObject();
             temp.put("id", player.getId());
             temp.put("ready", player.isReadyState());
             playerArray.put(temp);
         }
         JSONArray mapsArray = new JSONArray();
-        for(String name : Maps.getMapNames()){
+        for (String name : Maps.getMapNames()) {
             JSONObject temp = new JSONObject();
             temp.put("name", name);
             mapsArray.put(temp);
@@ -129,7 +129,7 @@ public class Room {
         return message.toString();
     }
 
-    public JSONObject getRoomInfomToJSON(){
+    public JSONObject getRoomInfomToJSON() {
         JSONObject object = new JSONObject();
         object.put("name", name);
         object.put("roomNum", roomNum);
@@ -137,7 +137,7 @@ public class Room {
         object.put("playerNum", playerList.size());
         object.put("roomMaster", roomMaster.getId());
         JSONArray array = new JSONArray();
-        for(Player player : getPlayerList()){
+        for (Player player : getPlayerList()) {
             JSONObject temp = new JSONObject();
             array.put(temp.put("id", player.getId()));
         }
@@ -153,23 +153,23 @@ public class Room {
         return playerList.remove(player);
     }
 
-    public ArrayList<Player> getPlayerList(){
+    public ArrayList<Player> getPlayerList() {
         return playerList;
     }
 
-    public ArrayList<Session> getPlayerSession(){
+    public ArrayList<Session> getPlayerSession() {
         ArrayList<Session> sessionList = new ArrayList<>();
-        for(Player player : getPlayerList()){
+        for (Player player : getPlayerList()) {
             sessionList.add(player.getSession());
         }
         return sessionList;
     }
 
-    public boolean changeRoomMaster(Player beforePlayer){
+    public boolean changeRoomMaster(Player beforePlayer) {
         Boolean isSuccess = false;
 
-        for(Player player : playerList){
-            if(roomMaster.getId().equals(beforePlayer.getId())){
+        for (Player player : playerList) {
+            if (roomMaster.getId().equals(beforePlayer.getId())) {
                 roomMaster = beforePlayer;
                 isSuccess = true;
             }
@@ -177,11 +177,11 @@ public class Room {
         return isSuccess;
     }
 
-    public boolean chanegMap(String name){
+    public boolean chanegMap(String name) {
         this.map = Maps.getMapFromName(name);
-        if(map != null ) {
+        if (map != null) {
             return true;
-        }else{
+        } else {
             this.map = Maps.FIRST_MAP;
             return false;
         }
@@ -196,7 +196,7 @@ public class Room {
         return null;
     }
 
-    public Player getPlayerEqualId(String id){
+    public Player getPlayerEqualId(String id) {
         for (Player player : getPlayerList()) {
             if (player.getId().equals(id)) {
                 return player;
@@ -206,8 +206,8 @@ public class Room {
     }
 
     public boolean isGamePossible() {
-        for(Player player : playerList){
-            if(player.equals(roomMaster) || player.isReadyState()){
+        for (Player player : playerList) {
+            if (player.equals(roomMaster) || player.isReadyState()) {
                 continue;
             }
             return false;
@@ -215,7 +215,7 @@ public class Room {
         return true;
     }
 
-    public boolean changeRoomToPlaying(Room room){
+    public boolean changeRoomToPlaying(Room room) {
         roomList.remove(room);
         return playingRoomList.add(room);
     }
