@@ -45,11 +45,11 @@ public class GameController {
         object.put("type", "game_inform");
         object.put("map_json", room.getMap().getPath());
         JSONArray array = new JSONArray();
-        for(String s : room.getMap().getResourcePaths()){
-            JSONObject path = new JSONObject();
-            path.put("path" , s);
-            array.put(path);
-        }
+//        for(String s : room.getMap().getResourcePaths()){
+//            JSONObject path = new JSONObject();
+//            path.put("path" , s);
+//            array.put(path);
+//        }
         object.put("map_resources", array);
         return object.toString();
     }
