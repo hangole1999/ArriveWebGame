@@ -147,8 +147,17 @@ public class WebSocket {
         System.out.println("onClose()");
 
         Player player = Player.getPlayerEqualSession(session);
-        if(player.isPlaying()){
+        Room room = GameController.findRoomFromPlayingRoomList(player.getRoomNum());
 
+        if(player.isPlaying()){
+            for(Player temp : room.getPlayerList()){
+                try {
+                    temp.getSession().getBasicRemote().sendText(GameController.exitPlayerFromGame(temp));
+                } catch (IOException e) {
+                    System.out.println("onClose() 오류");
+                    e.printStackTrace();
+                }
+            }
         }else{
 
         }

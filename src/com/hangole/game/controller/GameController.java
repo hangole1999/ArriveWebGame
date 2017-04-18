@@ -91,6 +91,15 @@ public class GameController {
         return null;
     }
 
+    public static String exitPlayerFromGame(Player player){
+        JSONObject message = new JSONObject();
+        message.put("type", "exitPlayerFromGame");
+        message.put("roomNum", player.getRoomNum());
+        message.put("id", player.getId());
+
+        return message.toString();
+    }
+
     /*
     public static Room changeMaster(int roomNum, Session session){
         Room targetRoom = findRoomFromRoomList(roomNum);

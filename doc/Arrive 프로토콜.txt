@@ -169,5 +169,5 @@ send exit player (Server to Client)
 {
     "type" : "exitPlayerFromGame",
     "roomNum" : 2,
-
+    "id" : "aasd"
 }
