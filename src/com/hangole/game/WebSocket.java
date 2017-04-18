@@ -108,7 +108,7 @@ public class WebSocket {
                     double characterX = jsonObject.getInt("x");
                     double characterY = jsonObject.getInt("y");
 
-                    session.getBasicRemote().sendText(Player.getPositionAsJSON(session));
+                    session.getBasicRemote().sendText(Player.getPositionAsJSON(targetRoom, session));
                 } else {
                     session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("좌표 보내기 실패"));
                 }
@@ -143,6 +143,7 @@ public class WebSocket {
     @OnClose
     public void onClose(Session session) {
         System.out.println("onClose()");
+
     }
 
     @OnError
