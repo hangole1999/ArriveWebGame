@@ -1,19 +1,19 @@
 
 // Key Downs
-var keyDowns = [];
+var keyPress = [];
+var keyDown = [];
+var keyUp = [];
 
 // On Key Down
 function onKeyDown(event) {
-    if (event.keyCode == 32 && keyDowns[event.keyCode] != true) {
-        player.shot();
-    }
-
-    keyDowns[event.keyCode] = true;
+    keyPress[event.keyCode] = true;
+    keyDown[event.keyCode] = true;
 }
 
 // On Key Down
 function onKeyUp(event) {
-    keyDowns[event.keyCode] = false;
+    keyPress[event.keyCode] = false;
+    keyUp[event.keyCode] = true;
 }
 
 // Add Key Listener
@@ -24,8 +24,12 @@ document.addEventListener('keyup', onKeyUp);
 var app = new PIXI.Application(800, 600, {backgroundColor : 0x1099bb});
 document.body.appendChild(app.view);
 
+// Lists
+var bullets = [];
+var characters = [];
+
 // Character Prototype
-function character(position) {
+function Character(position) {
 
     // Construction Sprite
     this.sprite = PIXI.Sprite.fromImage('assets/player.png');
@@ -45,12 +49,21 @@ function character(position) {
     this.bulletSpeed = 50;
     this.lerpValue = 0.2;
     this.slerpValue = 0.2;
-    this.rebound = 0.2;
+    this.rebound = 0.1;
     this.collision = {radius: 40};
 
     // Initializing Start Position
     this.sprite.position.x = position.x;
     this.sprite.position.y = position.y;
+
+    // Control Keys
+    this.controlKey = {
+        left: 37,
+        right: 39,
+        down: 40,
+        up: 38,
+        fire: 32
+    };
 
     // Get Start of Bullet Position Function
     this.getGunPoint = function () {
@@ -64,11 +77,11 @@ function character(position) {
         this.sprite.position.y += additionalPosition.y * 0.7;
     };
 
-    // Shot Function
-    this.shot = function() {
+    // Fire Function
+    this.fire = function() {
         var additionalPosition = {
-            x: Math.cos(this.sprite.rotation) * 1 + Math.cos(this.sprite.rotation) * this.bulletSpeed * this.rebound * Math.abs(this.sprite.velocity.x),
-            y: Math.sin(this.sprite.rotation) * 1 + Math.sin(this.sprite.rotation) * this.bulletSpeed * this.rebound * Math.abs(this.sprite.velocity.y)
+            x: Math.cos(this.sprite.rotation) * 1 + Math.cos(this.sprite.rotation) * this.bulletSpeed * this.rebound,
+            y: Math.sin(this.sprite.rotation) * 1 + Math.sin(this.sprite.rotation) * this.bulletSpeed * this.rebound
         }
 
         this.sprite.position.x -= additionalPosition.x;
@@ -101,48 +114,80 @@ function character(position) {
         this.sprite.destination.rotation = Math.atan2(this.sprite.destination.position.y, this.sprite.destination.position.x);
         this.sprite.rotation = slerp(this.sprite.rotation, this.sprite.destination.rotation, this.slerpValue);
     }
+
+    // Control
+    this.control = function() {
+
+        // Horizontal
+        if (keyPress[this.controlKey.left]) {
+            this.sprite.destination.position.x = -1;
+            this.sprite.velocity.x = -1;
+        } else if (keyPress[this.controlKey.right]) {
+            this.sprite.destination.position.x = 1;
+            this.sprite.velocity.x = 1;
+        } else if (keyPress[this.controlKey.down] || keyPress[this.controlKey.up]) {
+            this.sprite.destination.position.x = 0;
+            this.sprite.velocity.x = lerp(this.sprite.velocity.x, 0, this.lerpValue);
+        } else {
+            this.sprite.velocity.x = lerp(this.sprite.velocity.x, 0, this.lerpValue);
+        }
+
+        // Vertical
+        if (keyPress[this.controlKey.up]) {
+            this.sprite.destination.position.y = -1;
+            this.sprite.velocity.y = -1;
+        } else if (keyPress[this.controlKey.down]) {
+            this.sprite.destination.position.y = 1;
+            this.sprite.velocity.y = 1;
+        } else if (keyPress[this.controlKey.left] || keyPress[this.controlKey.right]) {
+            this.sprite.destination.position.y = 0;
+            this.sprite.velocity.y = lerp(this.sprite.velocity.y, 0, this.lerpValue);
+        } else {
+            this.sprite.velocity.y = lerp(this.sprite.velocity.y, 0, this.lerpValue);
+        }
+
+        // Fire
+        if (keyDown[this.controlKey.fire]) {
+            this.fire();
+        }
+    }
+
+    // Add to Characters List
+    characters.push(this);
+
+    // Add to Stage
+    app.stage.addChild(this.sprite);
 }
 
-var player = new character({x: app.renderer.width / 2, y: app.renderer.height / 2});
+// Construction Player
+// var player = new Character({x: app.renderer.width / 2, y: app.renderer.height / 2});
+//
+// // Construction Enemies
+// new Character({x: 100, y: 200});
+// new Character({x: 200, y: 100});
+// new Character({x: 300, y: 300});
 
-// Lists
-var bullets = [];
-var characters = [player];
-
-// Add Player to Stage
-app.stage.addChild(player.sprite);
+new Character({x: app.renderer.width / 2 + app.renderer.width / 4, y: app.renderer.height / 2}).controlKey = {
+    left: 37,
+    right: 39,
+    down: 40,
+    up: 38,
+    fire: 190
+};
+new Character({x: app.renderer.width / 2 - app.renderer.width / 4, y: app.renderer.height / 2}).controlKey = {
+    left: 65,
+    right: 68,
+    down: 83,
+    up: 87,
+    fire: 81
+};
 
 // Listen for animate update
 app.ticker.add(function(delta) {
 
-    // Processing Velocity
-    if (keyDowns[37]) {
-        player.sprite.destination.position.x = -1;
-        player.sprite.velocity.x = -1;
-    } else if (keyDowns[39]) {
-        player.sprite.destination.position.x = 1;
-        player.sprite.velocity.x = 1;
-    } else if (keyDowns[38] || keyDowns[40]) {
-        player.sprite.destination.position.x = 0;
-        player.sprite.velocity.x = lerp(player.sprite.velocity.x, 0, player.lerpValue);
-    } else {
-        player.sprite.velocity.x = lerp(player.sprite.velocity.x, 0, player.lerpValue);
-    }
-    if (keyDowns[38]) {
-        player.sprite.destination.position.y = -1;
-        player.sprite.velocity.y = -1;
-    } else if (keyDowns[40]) {
-        player.sprite.destination.position.y = 1;
-        player.sprite.velocity.y = 1;
-    } else if (keyDowns[37] || keyDowns[39]) {
-        player.sprite.destination.position.y = 0;
-        player.sprite.velocity.y = lerp(player.sprite.velocity.y, 0, player.lerpValue);
-    } else {
-        player.sprite.velocity.y = lerp(player.sprite.velocity.y, 0, player.lerpValue);
-    }
-
     // Processing Characters
     for(var i in characters) {
+        characters[i].control();
         characters[i].moving();
         characters[i].rotating();
     }
@@ -157,6 +202,9 @@ app.ticker.add(function(delta) {
             bullets.splice(i,1);
         }
     }
+
+    keyDown = [];
+    keyUp = [];
 });
 
 // Spherical Linear Interpolation
