@@ -117,6 +117,8 @@ function Character(position) {
 
     // Control
     this.control = function() {
+        if (this.controlKey == null)
+            return;
 
         // Horizontal
         if (keyPress[this.controlKey.left]) {
@@ -168,27 +170,27 @@ function Character(position) {
 }
 
 // Construction Player
-// var player = new Character({x: app.renderer.width / 2, y: app.renderer.height / 2});
-//
+var player = new Character({x: app.renderer.width / 2, y: app.renderer.height / 2});
+
 // // Construction Enemies
 // new Character({x: 100, y: 200});
 // new Character({x: 200, y: 100});
 // new Character({x: 300, y: 300});
 
-new Character({x: app.renderer.width / 2 + app.renderer.width / 4, y: app.renderer.height / 2}).controlKey = {
-    left: 37,
-    right: 39,
-    down: 40,
-    up: 38,
-    fire: 190
-};
-new Character({x: app.renderer.width / 2 - app.renderer.width / 4, y: app.renderer.height / 2}).controlKey = {
-    left: 65,
-    right: 68,
-    down: 83,
-    up: 87,
-    fire: 81
-};
+// new Character({x: app.renderer.width / 2 + app.renderer.width / 4, y: app.renderer.height / 2}).controlKey = {
+//     left: 37,
+//     right: 39,
+//     down: 40,
+//     up: 38,
+//     fire: 190
+// };
+// new Character({x: app.renderer.width / 2 - app.renderer.width / 4, y: app.renderer.height / 2}).controlKey = {
+//     left: 65,
+//     right: 68,
+//     down: 83,
+//     up: 87,
+//     fire: 81
+// };
 
 // Listen for animate update
 app.ticker.add(function(delta) {
