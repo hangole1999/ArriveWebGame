@@ -153,7 +153,11 @@ function Character(position) {
     }
 
     this.interpolation = function(transform) {
+        this.sprite.velocity.x = transform.velocity.x;
+        this.sprite.velocity.y = transform.velocity.y;
 
+        this.sprite.position.x = transform.position.x;
+        this.sprite.position.y = transform.position.y;
     }
 
     // Add to Characters List
