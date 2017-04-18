@@ -20,6 +20,8 @@ public class Player {
     private double characPositionY = 0;
     private int hp;
     private int killCount;
+    private boolean readyState;
+
 
 
     public Player(String id, boolean roomMaster, Session session) {
@@ -44,7 +46,7 @@ public class Player {
         this.characPositionY = y;
     }
 
-    public static String getPositionAsJSON(Session session){
+    public static String getPositionAsJSON(Room room, Session session){
         JSONObject message = new JSONObject();
         message.put("type","Position");
         message.put("x",room.getPlayerEqualSession(session).getPositionX());

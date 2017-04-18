@@ -164,3 +164,10 @@ send character Position (Server to Client)
    "x" : "(double 형)",
    "y" : "(double 형)"
 }
+
+send exit player (Server to Client)
+{
+    "type" : "exitPlayerFromGame",
+    "roomNum" : 2,
+
+}
