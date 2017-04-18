@@ -151,12 +151,7 @@ public class WebSocket {
         if(player.isPlaying()){
             Room room = GameController.findRoomFromPlayingRoomList(player.getRoomNum());
             for(Player temp : room.getPlayerList()){
-                try {
                     temp.getSession().getBasicRemote().sendText(GameController.exitPlayerFromGame(temp));
-                } catch (IOException e) {
-                    System.out.println("onClose() 오류");
-                    e.printStackTrace();
-                }
             }
         }else{
             if(player.isEnterState()){
