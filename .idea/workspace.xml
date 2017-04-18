@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12693e8c-1c83-41f7-883f-e8c6300d05fc" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/Arrive 프로토콜.txt" afterPath="$PROJECT_DIR$/doc/Arrive 프로토콜.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/hangole/game/WebSocket.java" afterPath="$PROJECT_DIR$/src/com/hangole/game/WebSocket.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/hangole/game/common/Player.java" afterPath="$PROJECT_DIR$/src/com/hangole/game/common/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/hangole/game/common/Room.java" afterPath="$PROJECT_DIR$/src/com/hangole/game/common/Room.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/hangole/game/controller/GameController.java" afterPath="$PROJECT_DIR$/src/com/hangole/game/controller/GameController.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,11 +28,54 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WebSocket.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Room.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/hangole/game/common/Room.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="398">
+              <caret line="205" column="5" lean-forward="true" selection-start-line="205" selection-start-column="5" selection-end-line="205" selection-end-column="5" />
+              <folding>
+                <element signature="e#1003#1004#0" expanded="true" />
+                <element signature="e#1041#1042#0" expanded="true" />
+                <element signature="e#1092#1093#0" expanded="true" />
+                <element signature="e#1123#1124#0" expanded="true" />
+                <element signature="e#1181#1182#0" expanded="true" />
+                <element signature="e#1212#1213#0" expanded="true" />
+                <element signature="e#1244#1245#0" expanded="true" />
+                <element signature="e#1274#1275#0" expanded="true" />
+                <element signature="e#1310#1311#0" expanded="true" />
+                <element signature="e#1345#1346#0" expanded="true" />
+                <element signature="e#1398#1399#0" expanded="true" />
+                <element signature="e#1446#1447#0" expanded="true" />
+                <element signature="e#1477#1478#0" expanded="true" />
+                <element signature="e#1504#1505#0" expanded="true" />
+                <element signature="e#1544#1545#0" expanded="true" />
+                <element signature="e#1576#1577#0" expanded="true" />
+                <element signature="e#1611#1612#0" expanded="true" />
+                <element signature="e#1642#1643#0" expanded="true" />
+                <element signature="e#1690#1691#0" expanded="true" />
+                <element signature="e#1730#1731#0" expanded="true" />
+                <element signature="e#1761#1762#0" expanded="true" />
+                <element signature="e#1788#1789#0" expanded="true" />
+                <element signature="e#1839#1840#0" expanded="true" />
+                <element signature="e#1873#1874#0" expanded="true" />
+                <element signature="e#1900#1901#0" expanded="true" />
+                <element signature="e#1931#1932#0" expanded="true" />
+                <element signature="e#4093#4094#0" expanded="true" />
+                <element signature="e#4131#4132#0" expanded="true" />
+                <element signature="e#4181#4182#0" expanded="true" />
+                <element signature="e#4229#4230#0" expanded="true" />
+                <element signature="e#4276#4277#0" expanded="true" />
+                <element signature="e#4309#4310#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WebSocket.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/hangole/game/WebSocket.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="546">
-              <caret line="150" column="0" lean-forward="true" selection-start-line="146" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
+            <state relative-caret-position="618">
+              <caret line="102" column="61" lean-forward="false" selection-start-line="102" selection-start-column="61" selection-end-line="102" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -41,8 +84,18 @@
       <file leaf-file-name="Arrive 프로토콜.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/doc/Arrive 프로토콜.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="753">
-              <caret line="171" column="0" lean-forward="true" selection-start-line="171" selection-start-column="0" selection-end-line="171" selection-end-column="0" />
+            <state relative-caret-position="316">
+              <caret line="152" column="9" lean-forward="true" selection-start-line="152" selection-start-column="9" selection-end-line="152" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/hangole/game/common/Player.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="214">
+              <caret line="114" column="5" lean-forward="true" selection-start-line="114" selection-start-column="5" selection-end-line="114" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -75,6 +128,7 @@
       <find>find</find>
       <find>getRoomList</find>
       <find>change</find>
+      <find>setPlayer</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -90,10 +144,10 @@
       <list>
         <option value="$PROJECT_DIR$/src/com/hangole/game/Util.java" />
         <option value="$PROJECT_DIR$/src/com/hangole/game/controller/GameController.java" />
-        <option value="$PROJECT_DIR$/src/com/hangole/game/common/Room.java" />
         <option value="$PROJECT_DIR$/src/com/hangole/game/common/Player.java" />
         <option value="$PROJECT_DIR$/doc/Arrive 프로토콜.txt" />
         <option value="$PROJECT_DIR$/src/com/hangole/game/WebSocket.java" />
+        <option value="$PROJECT_DIR$/src/com/hangole/game/common/Room.java" />
       </list>
     </option>
   </component>
@@ -104,10 +158,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="6" />
-    <option name="y" value="72" />
-    <option name="width" value="1378" />
-    <option name="height" value="744" />
+    <option name="x" value="952" />
+    <option name="width" value="976" />
+    <option name="height" value="1038" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -772,15 +825,15 @@
       <option name="presentableId" value="Default" />
       <updated>1492424834803</updated>
       <workItem from="1492424836194" duration="3132000" />
-      <workItem from="1492502445029" duration="2948000" />
+      <workItem from="1492502445029" duration="3246000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6080000" />
+    <option name="totallyTimeSpent" value="6378000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="6" y="72" width="1378" height="744" extended-state="0" />
+    <frame x="952" y="0" width="976" height="1038" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -879,11 +932,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1426">
           <caret line="92" column="33" lean-forward="true" selection-start-line="92" selection-start-column="33" selection-end-line="92" selection-end-column="33" />
-          <folding>
-            <element signature="e#1004#1005#0" expanded="true" />
-            <element signature="e#1902#1903#0" expanded="true" />
-            <element signature="e#4287#4288#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -910,62 +959,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hangole/game/common/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-466">
-          <caret line="58" column="5" lean-forward="true" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
-          <folding>
-            <element signature="e#735#736#0" expanded="true" />
-            <element signature="e#773#774#0" expanded="true" />
-            <element signature="e#809#810#0" expanded="true" />
-            <element signature="e#847#848#0" expanded="true" />
-            <element signature="e#889#890#0" expanded="true" />
-            <element signature="e#929#930#0" expanded="true" />
-            <element signature="e#970#971#0" expanded="true" />
-            <element signature="e#1010#1011#0" expanded="true" />
-            <marker date="1492508897227" expanded="false" signature="1393:1404" ph=" { " />
-            <marker date="1492508897227" expanded="false" signature="1414:1420" ph=" }" />
-            <marker date="1492508897227" expanded="false" signature="1455:1466" ph=" { " />
-            <marker date="1492508897227" expanded="false" signature="1484:1490" ph=" }" />
-            <marker date="1492508897227" expanded="false" signature="1541:1552" ph=" { " />
-            <marker date="1492508897227" expanded="false" signature="1581:1587" ph=" }" />
-            <marker date="1492508897227" expanded="false" signature="1620:1631" ph=" { " />
-            <marker date="1492508897227" expanded="false" signature="1646:1652" ph=" }" />
-            <marker date="1492508897227" expanded="false" signature="1707:1718" ph=" { " />
-            <marker date="1492508897227" expanded="false" signature="1741:1747" ph=" }" />
-            <marker date="1492508897227" expanded="false" signature="1800:1811" ph=" { " />
-            <marker date="1492508897227" expanded="false" signature="1829:1835" ph=" }" />
-            <marker date="1492508897227" expanded="false" signature="1870:1881" ph=" { " />
-            <marker date="1492508897227" expanded="false" signature="1899:1905" ph=" }" />
-            <marker date="1492508897227" expanded="false" signature="1956:1967" ph=" { " />
-            <marker date="1492508897227" expanded="false" signature="1996:2002" ph=" }" />
-            <marker date="1492508897227" expanded="false" signature="2038:2049" ph=" { " />
-            <marker date="1492508897227" expanded="false" signature="2079:2085" ph=" }" />
-            <marker date="1492508897227" expanded="false" signature="2130:2136" ph=" }" />
-            <marker date="1492508897227" expanded="false" signature="2167:2178" ph=" { " />
-            <marker date="1492508897227" expanded="false" signature="2191:2197" ph=" }" />
-            <marker date="1492508897227" expanded="false" signature="2228:2239" ph=" { " />
-            <marker date="1492508897227" expanded="false" signature="2256:2262" ph=" }" />
-            <marker date="1492508897227" expanded="false" signature="2307:2318" ph=" { " />
-            <marker date="1492508897227" expanded="false" signature="2345:2351" ph=" }" />
-            <marker date="1492508897227" expanded="false" signature="2382:2392" ph=" { " />
-            <marker date="1492508897227" expanded="false" signature="2409:2415" ph=" }" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hangole/game/common/Room.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="208" column="42" lean-forward="true" selection-start-line="208" selection-start-column="42" selection-end-line="208" selection-end-column="42" />
-          <folding>
-            <element signature="e#1004#1005#0" expanded="true" />
-            <element signature="e#1902#1903#0" expanded="true" />
-            <element signature="e#4287#4288#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/hangole/game/controller/GameController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23">
@@ -982,19 +975,68 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/doc/Arrive 프로토콜.txt">
+    <entry file="file://$PROJECT_DIR$/src/com/hangole/game/WebSocket.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="753">
-          <caret line="171" column="0" lean-forward="true" selection-start-line="171" selection-start-column="0" selection-end-line="171" selection-end-column="0" />
+        <state relative-caret-position="618">
+          <caret line="102" column="61" lean-forward="false" selection-start-line="102" selection-start-column="61" selection-end-line="102" selection-end-column="61" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/hangole/game/WebSocket.java">
+    <entry file="file://$PROJECT_DIR$/doc/Arrive 프로토콜.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="150" column="0" lean-forward="true" selection-start-line="146" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
+        <state relative-caret-position="316">
+          <caret line="152" column="9" lean-forward="true" selection-start-line="152" selection-start-column="9" selection-end-line="152" selection-end-column="9" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hangole/game/common/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="114" column="5" lean-forward="true" selection-start-line="114" selection-start-column="5" selection-end-line="114" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/hangole/game/common/Room.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="205" column="5" lean-forward="true" selection-start-line="205" selection-start-column="5" selection-end-line="205" selection-end-column="5" />
+          <folding>
+            <element signature="e#1003#1004#0" expanded="true" />
+            <element signature="e#1041#1042#0" expanded="true" />
+            <element signature="e#1092#1093#0" expanded="true" />
+            <element signature="e#1123#1124#0" expanded="true" />
+            <element signature="e#1181#1182#0" expanded="true" />
+            <element signature="e#1212#1213#0" expanded="true" />
+            <element signature="e#1244#1245#0" expanded="true" />
+            <element signature="e#1274#1275#0" expanded="true" />
+            <element signature="e#1310#1311#0" expanded="true" />
+            <element signature="e#1345#1346#0" expanded="true" />
+            <element signature="e#1398#1399#0" expanded="true" />
+            <element signature="e#1446#1447#0" expanded="true" />
+            <element signature="e#1477#1478#0" expanded="true" />
+            <element signature="e#1504#1505#0" expanded="true" />
+            <element signature="e#1544#1545#0" expanded="true" />
+            <element signature="e#1576#1577#0" expanded="true" />
+            <element signature="e#1611#1612#0" expanded="true" />
+            <element signature="e#1642#1643#0" expanded="true" />
+            <element signature="e#1690#1691#0" expanded="true" />
+            <element signature="e#1730#1731#0" expanded="true" />
+            <element signature="e#1761#1762#0" expanded="true" />
+            <element signature="e#1788#1789#0" expanded="true" />
+            <element signature="e#1839#1840#0" expanded="true" />
+            <element signature="e#1873#1874#0" expanded="true" />
+            <element signature="e#1900#1901#0" expanded="true" />
+            <element signature="e#1931#1932#0" expanded="true" />
+            <element signature="e#4093#4094#0" expanded="true" />
+            <element signature="e#4131#4132#0" expanded="true" />
+            <element signature="e#4181#4182#0" expanded="true" />
+            <element signature="e#4229#4230#0" expanded="true" />
+            <element signature="e#4276#4277#0" expanded="true" />
+            <element signature="e#4309#4310#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
