@@ -50,7 +50,7 @@ public class WebSocket {
                     ArrayList<Session> roomMembers = entered_room.getPlayerSession();
                     entered_room.getPlayerEqualSession(session).setEnterState(true);
                     for (Session member : roomMembers) {
-                        member.getBasicRemote().sendText(entered_room.getRoomDetailInfomToJSON().put("type", "room_detail").toString());
+                        member.getBasicRemote().sendText(entered_room.getRoomDetailInfomToJSON());
                     }
                 } else {
                     session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("방 인원이 가득 찼습니다."));
