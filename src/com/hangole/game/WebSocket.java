@@ -4,7 +4,6 @@ import com.hangole.game.common.Player;
 import com.hangole.game.common.Room;
 import com.hangole.game.controller.GameController;
 import com.hangole.server.session.Util;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.servlet.http.HttpSession;
@@ -87,6 +86,8 @@ public class WebSocket {
                     for(Player player : targetRoom.getPlayerList()){
                         player.setKillCount(0);
                         player.setHp(100);
+                        player.setPlayingState(true);
+                        player.setRoomNum(targetRoom.getRoomNum());
                         player.getSession().getBasicRemote().sendText(GameController.getGameStartInform(targetRoom));
                     }
                     targetRoom.changeRoomToPlaying(targetRoom);
@@ -96,7 +97,7 @@ public class WebSocket {
                 break;
             case "change_map" :
                 targetRoom = GameController.findRoomFromRoomList(jsonObject.getInt("roomNum"));
-                if(targetRoom.chanegMap(jsonObject.getString("name"))){
+                if(targetRoom.changeMap(jsonObject.getString("name"))){
                     session.getBasicRemote().sendText(com.hangole.game.Util.makeSuccessLog("Map 변경 성공"));
                 }else{
                     session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("올바르지 않은 Map 이름입니다."));
@@ -128,6 +129,7 @@ public class WebSocket {
                 String result = GameController.getPlayerResult(targetRoom);
 
                 for (Player player : targetRoom.getPlayerList()) {
+                    player.setPlayingState(false);
                     player.getSession().getBasicRemote().sendText(result);
                 }
                 break;
@@ -144,6 +146,12 @@ public class WebSocket {
     public void onClose(Session session) {
         System.out.println("onClose()");
 
+        Player player = Player.getPlayerEqualSession(session);
+        if(player.isPlaying()){
+
+        }else{
+
+        }
     }
 
     @OnError

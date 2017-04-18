@@ -177,7 +177,7 @@ public class Room {
         return isSuccess;
     }
 
-    public boolean chanegMap(String name){
+    public boolean changeMap(String name){
         this.map = Maps.getMapFromName(name);
         if(map != null ) {
             return true;

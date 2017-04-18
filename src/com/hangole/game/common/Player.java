@@ -1,7 +1,6 @@
 package com.hangole.game.common;
 
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.websocket.Session;
@@ -16,13 +15,13 @@ public class Player {
     private String id;
     private boolean roomMaster;
     private Session session;
-    private double characPositionX = 0;
-    private double characPositionY = 0;
+    private double characterPositionX = 0;
+    private double characterPositionY = 0;
     private int hp;
     private int killCount;
     private boolean readyState;
-
-
+    private boolean playingState;
+    private int roomNum;
 
     public Player(String id, boolean roomMaster, Session session) {
         this.id = id;
@@ -31,19 +30,19 @@ public class Player {
     }
 
     public double getPositionX() {
-        return characPositionX;
+        return characterPositionX;
     }
 
     public double getPositionY() {
-        return characPositionY;
+        return characterPositionY;
     }
 
     public void setPositionX(double x) {
-        this.characPositionX = x;
+        this.characterPositionX = x;
     }
 
     public void setPosition(double y) {
-        this.characPositionY = y;
+        this.characterPositionY = y;
     }
 
     public static String getPositionAsJSON(Room room, Session session){
@@ -113,6 +112,22 @@ public class Player {
     public boolean minusHp(int amount){
         this.hp -= amount;
         return  this.hp <= 0;
+    }
+
+    public boolean isPlaying(){
+        return playingState;
+    }
+
+    public void setPlayingState(boolean state){
+        playingState = state;
+    }
+
+    public int getRoomNum() {
+        return roomNum;
+    }
+
+    public void setRoomNum(int roomNum) {
+        this.roomNum = roomNum;
     }
 
     public static Player getEqualPlayer(Player player) {
