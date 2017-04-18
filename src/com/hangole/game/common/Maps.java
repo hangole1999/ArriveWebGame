@@ -7,19 +7,15 @@ import java.util.ArrayList;
  * Created by dsm_025 on 2017-04-11.
  */
 public enum Maps {
-    FIRST_MAP("/maps/first.json", "firstMap", new File("./maps/firstMap").listFiles()),
-    SECOND_MAP("/maps/first.json", "secondMap", new File("./maps/secondMap").listFiles()),
-    THIRD_MAP("/maps/first.json", "thirdMap", new File("./maps/thirdMap").listFiles());
+    FIRST_MAP("/maps/first.json", "firstMap"),
+    SECOND_MAP("/maps/first.json", "secondMap"),
+    THIRD_MAP("/maps/first.json", "thirdMap");
     private String path;
     private String name;
-    ArrayList<String> resourceList;
 
-    Maps(String path, String name, File[] files) {
+    Maps(String path, String name) {
         this.path = path;
         this.name = name;
-        for(File file : files){
-            resourceList.add(file.getPath());
-        }
     }
 
     public String getPath() {
@@ -31,9 +27,6 @@ public enum Maps {
     }
 
 
-    public ArrayList<String> getResourcePaths(){
-        return resourceList;
-    }
 
     public static ArrayList<String> getMapNames(){
         ArrayList<String> list = new ArrayList<>();
