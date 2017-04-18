@@ -39,6 +39,10 @@ public class Room {
         return this.roomMaster;
     }
 
+    public void setRoomMaster(Player player){
+        roomMaster = player;
+    }
+
     public static ArrayList<Room> getRoomList() {
         return roomList;
     }
@@ -88,8 +92,9 @@ public class Room {
         return this.map;
     }
 
-    public JSONObject getRoomDetailInfomToJSON(){
+    public String getRoomDetailInfomToJSON(){
         JSONObject object = new JSONObject();
+        object.put("type", "room_detail");
         object.put("name", name);
         object.put("roomNum", roomNum);
         object.put("lock", lock);
@@ -110,7 +115,7 @@ public class Room {
         }
         object.put("playerList", playerArray);
         object.put("mapList", mapsArray);
-        return object;
+        return object.toString();
     }
 
     public static String getRoomListAsJSON() {
@@ -218,5 +223,9 @@ public class Room {
     public boolean changeRoomToPlaying(Room room){
         roomList.remove(room);
         return playingRoomList.add(room);
+    }
+
+    public static void removeRoom(Room room){
+        roomList.remove(room);
     }
 }

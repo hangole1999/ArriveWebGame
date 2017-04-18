@@ -21,6 +21,7 @@ public class Player {
     private int killCount;
     private boolean readyState;
     private boolean playingState;
+    private boolean enterState;
     private int roomNum;
 
     public Player(String id, boolean roomMaster, Session session) {
@@ -130,6 +131,14 @@ public class Player {
         this.roomNum = roomNum;
     }
 
+    public boolean isEnterState(){
+        return enterState;
+    }
+
+    public void setEnterState(boolean state){
+        enterState = state;
+    }
+
     public static Player getEqualPlayer(Player player) {
         for (Player temp : Player.getPlayerList()) {
             if (temp.getSession().equals(player.getSession())) {
@@ -146,5 +155,9 @@ public class Player {
             }
         }
         return null;
+    }
+
+    public static void removePlayer(Player player){
+        playerList.remove(player);
     }
 }

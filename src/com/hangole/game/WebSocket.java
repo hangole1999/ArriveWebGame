@@ -42,12 +42,13 @@ public class WebSocket {
 
             case "create_room":
                 Room created_room = GameController.createRoom(jsonObject.getString("name"), jsonObject.getBoolean("lock"), jsonObject.getString("password"), session);
-                session.getBasicRemote().sendText(created_room.getRoomDetailInfomToJSON().put("type", "room_detail").toString());
+                session.getBasicRemote().sendText(created_room.getRoomDetailInfomToJSON());
             break;
             case "enter_room":
                 Room entered_room = GameController.enterRoom(jsonObject.getInt("roomNum"), session);
                 if (entered_room != null) {
                     ArrayList<Session> roomMembers = entered_room.getPlayerSession();
+                    entered_room.getPlayerEqualSession(session).setEnterState(true);
                     for (Session member : roomMembers) {
                         member.getBasicRemote().sendText(entered_room.getRoomInfomToJSON().put("type", "room_detail").toString());
                     }
@@ -62,7 +63,7 @@ public class WebSocket {
                     Boolean isSuccess = targetRoom.changeRoomMaster(Player.getPlayerEqualSession(session));
 
                     if (isSuccess == true) {
-                        session.getBasicRemote().sendText(targetRoom.getRoomInfomToJSON().put("type", "room_detail").toString());
+                        session.getBasicRemote().sendText(targetRoom.getRoomDetailInfomToJSON());
                     } else {
                         session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("방장 변경에 실패했습니다."));
                     }
@@ -75,6 +76,7 @@ public class WebSocket {
             case "get_out_room" :
                 targetRoom = GameController.findRoomFromRoomList(jsonObject.getInt("roomNum"));
                 if(targetRoom.removePlayer(targetRoom.getPlayerEqualSession(session))){
+                    targetRoom.getPlayerEqualSession(session).setEnterState(true);
                     session.getBasicRemote().sendText(com.hangole.game.Util.makeSuccessLog("나가기 성공"));
                 }else{
                     session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("나가기 성공"));
@@ -87,7 +89,6 @@ public class WebSocket {
                         player.setKillCount(0);
                         player.setHp(100);
                         player.setPlayingState(true);
-                        player.setRoomNum(targetRoom.getRoomNum());
                         player.getSession().getBasicRemote().sendText(GameController.getGameStartInform(targetRoom));
                     }
                     targetRoom.changeRoomToPlaying(targetRoom);
@@ -143,14 +144,42 @@ public class WebSocket {
     }
 
     @OnClose
-    public void onClose(Session session) {
+    public void onClose(Session session) throws IOException {
         System.out.println("onClose()");
 
         Player player = Player.getPlayerEqualSession(session);
         if(player.isPlaying()){
-
+            Room room = GameController.findRoomFromPlayingRoomList(player.getRoomNum());
+            for(Player temp : room.getPlayerList()){
+                try {
+                    temp.getSession().getBasicRemote().sendText(GameController.exitPlayerFromGame(temp));
+                } catch (IOException e) {
+                    System.out.println("onClose() 오류");
+                    e.printStackTrace();
+                }
+            }
         }else{
-
+            if(player.isEnterState()){
+                Room relevantRoom = GameController.findRoomFromRoomList(player.getRoomNum());
+                if(relevantRoom.getPlayerNumber() ==1){     //방에 혼자 있을 때
+                    Room.removeRoom(relevantRoom);
+                }else if(player.isRoomMaster()){            //방의 방장인데 다른 플레이어가 있을 때
+                    Player.removePlayer(player);
+                    relevantRoom.removePlayer(player);
+                    relevantRoom.setRoomMaster(relevantRoom.getPlayerList().get(0));
+                    for(Player remainPlayer : relevantRoom.getPlayerList()){
+                        remainPlayer.getSession().getBasicRemote().sendText(relevantRoom.getRoomDetailInfomToJSON().toString());
+                    }
+                }else{                                      //방의 일원 인 경우
+                    Player.removePlayer(player);
+                    relevantRoom.removePlayer(player);
+                    for(Player remainPlayer : relevantRoom.getPlayerList()){
+                        remainPlayer.getSession().getBasicRemote().sendText(relevantRoom.getRoomDetailInfomToJSON().toString());
+                    }
+                }
+            }else{                                          //메인 화면에 있는 경우
+                Player.removePlayer(player);
+            }
         }
     }
 
