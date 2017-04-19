@@ -2,12 +2,20 @@
   <artifact type="exploded-war" name="ArriveWebGame:war exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/ArriveWebGame_war_exploded</output-path>
     <root id="root">
-      <element id="javaee-facet-resources" facet="ArriveWebGame/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="ArriveWebGame" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="lib" />
+          <element id="library" level="project" name="lib3" />
+          <element id="library" level="project" name="mongo-2.10.1" />
+          <element id="library" level="project" name="lib1" />
+        </element>
       </element>
+      <element id="javaee-facet-resources" facet="ArriveWebGame/web/Web3" />
+      <element id="javaee-facet-resources" facet="ArriveWebGame/web/Web" />
+      <element id="javaee-facet-resources" facet="ArriveWebGame/web/Web2" />
     </root>
   </artifact>
 </component>
