@@ -2,7 +2,7 @@
  * Created by Hangole on 2017-03-20.
  */
 
-var webSocket = new WebSocket("ws://localhost:8882/game");
+var webSocket = new WebSocket("ws://10.156.145.153:8882/game");
 
 webSocket.onopen = function(message){
     console.log('onopen()');
@@ -25,6 +25,19 @@ function sendData(object) {
     webSocket.send(JSON.stringify(object));
 }
 
+function createRoomF() {
+    sendData(createRoom);
+}
+
+function joinAndReady() {
+    sendData(enterRoom);
+    sendData(ready);
+}
+
+function positionF() {
+    sendData(position)
+}
+
 var createRoom = {
     type : "create_room",
     name : "jinseong's room",
@@ -45,4 +58,11 @@ var ready = {
 var start = {
     type : "game_start",
     roomNum : 1
+}
+
+var position = {
+    type : "characterPosition",
+    roomNum : 1,
+    x : 0,
+    y : 0
 }
