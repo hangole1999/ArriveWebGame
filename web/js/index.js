@@ -186,6 +186,7 @@ app.ticker.add(function(delta) {
         characters[i].rotating();
     }
 
+    // Sync Player Transform
     player.syncTransform();
 
     // Processing Bullets

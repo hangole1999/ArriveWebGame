@@ -4,6 +4,31 @@
 
 var webSocket = new WebSocket("ws://localhost:8882/game");
 
+webSocket.onopen = function(message){
+    console.log('onopen()');
+    console.log(message);
+};
+webSocket.onclose = function(message){
+    console.log('onclose()');
+    console.log(message);
+};
+webSocket.onerror = function(message){
+    console.log('onerror()');
+    console.log(message);
+};
+webSocket.onmessage = function(message){
+    console.log('onmessage()');
+    console.log(message);
+};
+
+function send(object) {
+    try {
+        webSocket.send(JSON.stringify(object));
+    } catch (e) {
+        console.log(e);
+    }
+}
+
 var Network = {
     roomNumber: -1,
     createRoom: function(name, lock, password) {
@@ -26,34 +51,15 @@ var Network = {
         this.x = x;
         this.y = y;
         this.rotation = rotation;
-    }, send: function(object) {
-        webSocket.send(JSON.stringify(object));
     }, sendCreateRoom: function(name, lock, password) {
-        this.send(new this.createRoom(name, lock, password));
+        send(new this.createRoom(name, lock, password));
     }, sendJoinAndReady: function(roomNum) {
-        this.send(new this.enterRoom(roomNum));
-        this.send(new this.ready());
+        send(new this.enterRoom(roomNum));
+        send(new this.ready());
     }, sendStartAndPosition: function(x, y, rotation) {
-        this.send(new this.start());
-        this.send(new this.position(x, y, rotation));
+        send(new this.start());
+        send(new this.position(x, y, rotation));
     }, sendPosition: function(x, y, rotation) {
-        this.send(new this.position(x, y, rotation));
+        send(new this.position(x, y, rotation));
     }
-};
-
-webSocket.onopen = function(message){
-    console.log('onopen()');
-    console.log(message);
-};
-webSocket.onclose = function(message){
-    console.log('onclose()');
-    console.log(message);
-};
-webSocket.onerror = function(message){
-    console.log('onerror()');
-    console.log(message);
-};
-webSocket.onmessage = function(message){
-    console.log('onmessage()');
-    console.log(message);
 };
