@@ -26,6 +26,9 @@
       <root url="jar://$PROJECT_DIR$/lib/commons-logging-1.0.4.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/tyrus-container-glassfish-cdi.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/commons-discovery-0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/testArrive_war_exploded/WEB-INF/lib/junit-4.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/testArrive_war_exploded/WEB-INF/lib/json-20160810.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/testArrive_war_exploded/WEB-INF/lib/mongo.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

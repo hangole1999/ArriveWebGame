@@ -116,7 +116,6 @@ public class WebSocket {
                         double characterY = jsonObject.getInt("y");
                         double rotation = jsonObject.getInt("rotation");
 
-
                         for (Player player : targetRoom.getPlayerList()) {
                             player.getSession().getBasicRemote().sendText(Player.getPositionAsJSON(characterX, characterY, rotation));
                         }
