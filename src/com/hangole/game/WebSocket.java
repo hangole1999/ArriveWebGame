@@ -43,7 +43,8 @@ public class WebSocket {
             case "create_room":
                 Room created_room = GameController.createRoom(jsonObject.getString("name"), jsonObject.getBoolean("lock"), jsonObject.getString("password"), session);
                 session.getBasicRemote().sendText(created_room.getRoomDetailInfomToJSON());
-            break;
+                System.out.println(Room.getRoomList());
+                break;
             case "enter_room":
                 Room entered_room = GameController.enterRoom(jsonObject.getInt("roomNum"), session);
                 if (entered_room != null) {
@@ -69,59 +70,68 @@ public class WebSocket {
                     }
                 }
                 break;
-            case "change_ready" :
+            case "change_ready":
                 targetRoom = GameController.findRoomFromRoomList(jsonObject.getInt("roomNum"));
                 targetRoom.getPlayerEqualSession(session).changeReadyState();
                 break;
-            case "get_out_room" :
+            case "get_out_room":
                 targetRoom = GameController.findRoomFromRoomList(jsonObject.getInt("roomNum"));
-                if(targetRoom.removePlayer(targetRoom.getPlayerEqualSession(session))){
+                if (targetRoom.removePlayer(targetRoom.getPlayerEqualSession(session))) {
                     targetRoom.getPlayerEqualSession(session).setEnterState(true);
                     session.getBasicRemote().sendText(com.hangole.game.Util.makeSuccessLog("나가기 성공"));
-                }else{
+                } else {
                     session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("나가기 성공"));
                 }
                 break;
             case "game_start":
                 targetRoom = GameController.findRoomFromRoomList(jsonObject.getInt("roomNum"));
-                if(targetRoom.isGamePossible()){
-                    for(Player player : targetRoom.getPlayerList()){
+                if (targetRoom.isGamePossible()) {
+                    for (Player player : targetRoom.getPlayerList()) {
                         player.setKillCount(0);
                         player.setHp(100);
                         player.setPlayingState(true);
                         player.getSession().getBasicRemote().sendText(GameController.getGameStartInform(targetRoom));
                     }
                     targetRoom.changeRoomToPlaying(targetRoom);
-                }else{
+                    System.out.println(Room.getPlayingRoomList());
+                } else {
                     session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("레디를 안한 팀원이 있습니다."));
                 }
                 break;
-            case "change_map" :
+            case "change_map":
                 targetRoom = GameController.findRoomFromRoomList(jsonObject.getInt("roomNum"));
-                if(targetRoom.changeMap(jsonObject.getString("name"))){
+                if (targetRoom.changeMap(jsonObject.getString("name"))) {
                     session.getBasicRemote().sendText(com.hangole.game.Util.makeSuccessLog("Map 변경 성공"));
-                }else{
+                } else {
                     session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("올바르지 않은 Map 이름입니다."));
                 }
                 break;
             case "characterPosition":
-                targetRoom = GameController.findRoomFromRoomList(jsonObject.getInt("roomNum"));
-                if (targetRoom != null) {
-                    double characterX = jsonObject.getInt("x");
-                    double characterY = jsonObject.getInt("y");
+                System.out.println(Room.getPlayingRoomList());
 
-                    session.getBasicRemote().sendText(Player.getPositionAsJSON(targetRoom, session));
-                } else {
-                    session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("좌표 보내기 실패"));
+                targetRoom = GameController.findRoomFromPlayingRoomList(jsonObject.getInt("roomNum"));
+                try {
+                    if (targetRoom != null) {
+                        double characterX = jsonObject.getInt("x");
+                        double characterY = jsonObject.getInt("y");
+
+                        for (Player player : targetRoom.getPlayerList()) {
+                            player.getSession().getBasicRemote().sendText(Player.getPositionAsJSON(characterX, characterY));
+                        }
+                    } else {
+                        session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("좌표 보내기 실패"));
+                    }
+                } catch (NullPointerException ex) {
+                    ex.printStackTrace();
                 }
                 break;
             case "lose_hp":
                 targetRoom = GameController.findRoomFromPlayingRoomList(jsonObject.getInt("roomNum"));
-                if(targetRoom.getPlayerEqualSession(session).minusHp(15)){
+                if (targetRoom.getPlayerEqualSession(session).minusHp(15)) {
                     Player player = targetRoom.getPlayerEqualId(jsonObject.getString("bullet_attacker"));
                     player.upCountKill();
                 }
-                for(Player player : targetRoom.getPlayerList()){
+                for (Player player : targetRoom.getPlayerList()) {
                     player.getSession().getBasicRemote().sendText(GameController.getPlayersHPInfo(targetRoom));
                 }
                 break;
@@ -148,31 +158,31 @@ public class WebSocket {
         System.out.println("onClose()");
 
         Player player = Player.getPlayerEqualSession(session);
-        if(player.isPlaying()){
+        if (player.isPlaying()) {
             Room room = GameController.findRoomFromPlayingRoomList(player.getRoomNum());
-            for(Player temp : room.getPlayerList()){
-                    temp.getSession().getBasicRemote().sendText(GameController.exitPlayerFromGame(temp));
+            for (Player temp : room.getPlayerList()) {
+                temp.getSession().getBasicRemote().sendText(GameController.exitPlayerFromGame(temp));
             }
-        }else{
-            if(player.isEnterState()){
+        } else {
+            if (player.isEnterState()) {
                 Room relevantRoom = GameController.findRoomFromRoomList(player.getRoomNum());
-                if(relevantRoom.getPlayerNumber() ==1){     //방에 혼자 있을 때
+                if (relevantRoom.getPlayerNumber() == 1) {     //방에 혼자 있을 때
                     Room.removeRoom(relevantRoom);
-                }else if(player.isRoomMaster()){            //방의 방장인데 다른 플레이어가 있을 때
+                } else if (player.isRoomMaster()) {            //방의 방장인데 다른 플레이어가 있을 때
                     Player.removePlayer(player);
                     relevantRoom.removePlayer(player);
                     relevantRoom.setRoomMaster(relevantRoom.getPlayerList().get(0));
-                    for(Player remainPlayer : relevantRoom.getPlayerList()){
+                    for (Player remainPlayer : relevantRoom.getPlayerList()) {
                         remainPlayer.getSession().getBasicRemote().sendText(relevantRoom.getRoomDetailInfomToJSON().toString());
                     }
-                }else{                                      //방의 일원 인 경우
+                } else {                                      //방의 일원 인 경우
                     Player.removePlayer(player);
                     relevantRoom.removePlayer(player);
-                    for(Player remainPlayer : relevantRoom.getPlayerList()){
+                    for (Player remainPlayer : relevantRoom.getPlayerList()) {
                         remainPlayer.getSession().getBasicRemote().sendText(relevantRoom.getRoomDetailInfomToJSON().toString());
                     }
                 }
-            }else{                                          //메인 화면에 있는 경우
+            } else {                                          //메인 화면에 있는 경우
                 Player.removePlayer(player);
             }
         }

@@ -48,7 +48,7 @@ public class Room {
     }
 
     public static ArrayList<Room> getPlayingRoomList() {
-        return roomList;
+        return playingRoomList;
     }
 
 
@@ -221,8 +221,9 @@ public class Room {
     }
 
     public boolean changeRoomToPlaying(Room room){
-        roomList.remove(room);
-        return playingRoomList.add(room);
+        playingRoomList.add(room);
+        return roomList.remove(room);
+
     }
 
     public static void removeRoom(Room room){
