@@ -106,7 +106,7 @@ public class WebSocket {
                     session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("올바르지 않은 Map 이름입니다."));
                 }
                 break;
-            case "characterPosition":
+            case "character_Position":
                 System.out.println(Room.getPlayingRoomList());
 
                 targetRoom = GameController.findRoomFromPlayingRoomList(jsonObject.getInt("roomNum"));

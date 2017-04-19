@@ -105,7 +105,7 @@ game start
 ==================== Playing Game ===============================
 character position (Client to Server)
 {
-  "type" : "characterPosition",
+  "type" : "character_Position",
   "roomNum" : 2,
   "x" : "(더블 형)",
   "y" : "(더블 형)",
