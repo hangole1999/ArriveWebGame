@@ -2,7 +2,44 @@
  * Created by Hangole on 2017-03-20.
  */
 
-var webSocket = new WebSocket("ws://10.156.145.153:8882/game");
+var webSocket = new WebSocket("ws://localhost:8882/game");
+
+var Network = {
+    roomNumber: -1,
+    createRoom: function(name, lock, password) {
+        this.type = 'create_room';
+        this.name = name;
+        this.lock = lock;
+        this.password = password;
+    }, enterRoom: function(roomNum) {
+        this.type = 'enter_room';
+        this.roomNum = roomNum;
+    }, ready: function() {
+        this.type = 'ready';
+        this.roomNum = this.roomNumber;
+    }, start: function() {
+        this.type = 'start';
+        this.roomNum = this.roomNumber;
+    }, position: function(x, y, rotation) {
+        this.type = 'position';
+        this.roomNum = this.roomNumber;
+        this.x = x;
+        this.y = y;
+        this.rotation = rotation;
+    }, send: function(object) {
+        webSocket.send(JSON.stringify(object));
+    }, sendCreateRoom: function(name, lock, password) {
+        this.send(new this.createRoom(name, lock, password));
+    }, sendJoinAndReady: function(roomNum) {
+        this.send(new this.enterRoom(roomNum));
+        this.send(new this.ready());
+    }, sendStartAndPosition: function(x, y, rotation) {
+        this.send(new this.start());
+        this.send(new this.position(x, y, rotation));
+    }, sendPosition: function(x, y, rotation) {
+        this.send(new this.position(x, y, rotation));
+    }
+};
 
 webSocket.onopen = function(message){
     console.log('onopen()');
@@ -20,49 +57,3 @@ webSocket.onmessage = function(message){
     console.log('onmessage()');
     console.log(message);
 };
-
-function sendData(object) {
-    webSocket.send(JSON.stringify(object));
-}
-
-function createRoomF() {
-    sendData(createRoom);
-}
-
-function joinAndReady() {
-    sendData(enterRoom);
-    sendData(ready);
-}
-
-function positionF() {
-    sendData(position)
-}
-
-var createRoom = {
-    type : "create_room",
-    name : "jinseong's room",
-    password : "1234",
-    lock : true
-};
-
-var enterRoom = {
-    type : "enter_room",
-    roomNum : 1,
-}
-
-var ready = {
-    type : "change_ready",
-    roomNum : 1
-}
-
-var start = {
-    type : "game_start",
-    roomNum : 1
-}
-
-var position = {
-    type : "characterPosition",
-    roomNum : 1,
-    x : 0,
-    y : 0
-}
