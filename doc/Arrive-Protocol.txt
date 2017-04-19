@@ -94,21 +94,27 @@ game inform ( 게임이 시작될 때 주는 정보 )
     "map_resources" : [
         {"path" : "image/1.jpg"},
         ...
-    ]
+    ],
+    "player_positions" : [
+            {"rlalstjd" : [{"x" : 2}, {"y" : 3}],}
+            ...
+        ]
 }
 game start
 {
     "type" : "game_start",
     "roomNum" : 2
+
 }
 
 ==================== Playing Game ===============================
 character position (Client to Server)
 {
-  "type" : "characterPosition",
+  "type" : "character_Position",
   "roomNum" : 2,
   "x" : "(더블 형)",
-  "y" : "(더블 형)"
+  "y" : "(더블 형)",
+  "rotation" : "(더블형)"
 }
 lose hp
 {

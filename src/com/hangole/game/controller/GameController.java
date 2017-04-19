@@ -50,6 +50,7 @@ public class GameController {
 //            path.put("path" , s);
 //            array.put(path);
 //        }
+
         object.put("map_resources", array);
         return object.toString();
     }
