@@ -114,9 +114,10 @@ public class WebSocket {
                     if (targetRoom != null) {
                         double characterX = jsonObject.getInt("x");
                         double characterY = jsonObject.getInt("y");
+                        double rotation = jsonObject.getInt("rotation");
 
                         for (Player player : targetRoom.getPlayerList()) {
-                            player.getSession().getBasicRemote().sendText(Player.getPositionAsJSON(characterX, characterY));
+                            player.getSession().getBasicRemote().sendText(Player.getPositionAsJSON(characterX, characterY, rotation));
                         }
                     } else {
                         session.getBasicRemote().sendText(com.hangole.game.Util.makeErrorLog("좌표 보내기 실패"));

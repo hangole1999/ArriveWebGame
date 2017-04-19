@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="lib2">
     <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/testArrive_war_exploded/WEB-INF/lib/junit-4.10.jar!/" />
       <root url="jar://$PROJECT_DIR$/out/artifacts/testArrive_war_exploded/WEB-INF/lib/json-20160810.jar!/" />
       <root url="jar://$PROJECT_DIR$/out/artifacts/testArrive_war_exploded/WEB-INF/lib/mongo.jar!/" />
-      <root url="jar://$PROJECT_DIR$/out/artifacts/testArrive_war_exploded/WEB-INF/lib/junit-4.10.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

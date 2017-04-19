@@ -46,11 +46,12 @@ public class Player {
         this.characterPositionY = y;
     }
 
-    public static String getPositionAsJSON(double x, double y){
+    public static String getPositionAsJSON(double x, double y, double rotation){
         JSONObject message = new JSONObject();
         message.put("type","Position");
         message.put("x", x);
         message.put("y",y);
+        message.put("rotation", rotation);
         return message.toString();
     }
 

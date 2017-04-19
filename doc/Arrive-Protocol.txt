@@ -108,7 +108,8 @@ character position (Client to Server)
   "type" : "characterPosition",
   "roomNum" : 2,
   "x" : "(더블 형)",
-  "y" : "(더블 형)"
+  "y" : "(더블 형)",
+  "rotation" : "(더블형)"
 }
 lose hp
 {
